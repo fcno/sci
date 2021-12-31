@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Testing\{RefreshDatabase, TestCase};
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\TestCase;
 use Tests\CreatesApplication;
 
 /*
