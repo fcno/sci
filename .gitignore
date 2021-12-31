@@ -16,3 +16,4 @@ yarn-error.log
 /build
 .php-cs-fixer.cache
 package-lock.json
+composer.lock
