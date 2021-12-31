@@ -7,6 +7,8 @@ includes:
 parameters:
     paths:
         - app
+        - database
+        - tests
 
     # The level 9 is the highest level
     level: 5
