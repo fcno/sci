@@ -3,16 +3,18 @@ name: Normalize composer.json
 on:
   push:
     paths:
-      - "composer.json"
+      - 'composer.json'
 
 jobs:
   normalize:
+    name: Normalize
     runs-on: ubuntu-latest
+
     steps:
-      - name: Git checkout
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: normalize composer.json
+      - name: Normalize composer.json
         run: |
           composer global require ergebnis/composer-normalize
           composer normalize
