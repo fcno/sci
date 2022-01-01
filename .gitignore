@@ -13,3 +13,7 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/build
+.php-cs-fixer.cache
+package-lock.json
+composer.lock
