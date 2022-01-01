@@ -1,14 +1,28 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "name": "fcno/sci",
+    "description": "Sistema de Contagem de Impressão.",
     "license": "MIT",
     "type": "project",
     "keywords": [
-        "framework",
+        "fcno",
+        "impressão",
+        "contagem",
+        "print",
+        "count",
+        "sci",
         "laravel"
     ],
+    "homepage": "https://github.com/fcno/sci",
+    "authors": [
+        {
+            "name": "Fabio Cassiano",
+            "email": "fabiocassiano@jfes.jus.br",
+            "homepage": "https://github.com/fcno",
+            "role": "Developer"
+        }
+    ],
     "require": {
-        "php": "^7.3 || ^8.0",
+        "php": "^8.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
