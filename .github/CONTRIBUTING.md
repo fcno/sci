@@ -40,11 +40,34 @@ Before submitting a pull request:
 
 If the project maintainer has any additional requirements, you will find them listed here.
 
-- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - The easiest way to apply the conventions is to install [PHP Code Sniffer](https://pear.php.net/package/PHP_CodeSniffer).
+- **[Symfony Coding Standard](https://symfony.com/doc/current/contributing/code/standards.html)** - We use the package [PHP Coding Standards Fixer (PHP CS Fixer)](https://github.com/FriendsOfPHP/PHP-CS-Fixer) to apply the conventions.
+
+  - Specific patterns beyond Symfony
+
+  ```php
+  'not_operator_with_successor_space' => true,
+  'blank_line_before_statement' => [
+    'statements' => ['break', 'continue', 'declare', 'return', 'throw', 'try'],
+  ],
+  'phpdoc_line_span' => true,
+  'phpdoc_order' => true,
+  'phpdoc_types_order' => [
+    'null_adjustment' => 'always_last', 'sort_algorithm' => 'alpha'
+  ],
+  'phpdoc_var_annotation_correct_order' => true,
+  'method_argument_space' => [
+    'on_multiline' => 'ensure_fully_multiline',
+    'keep_multiple_spaces_after_comma' => true,
+  ],
+  ```
+
+- **[PHPStan - PHP Static Analysis Tool](https://phpstan.org/user-guide/getting-started)** - We use the package [phpstan/phpstan](https://github.com/phpstan/phpstan) to php static code analysis.
+
+- **[ESLint](https://eslint.org/)** - We use the package [eslint/eslint](https://github.com/eslint/eslint) to check syntax, find problems and enforce javascript code style configured to follow the [JavaScript Standard Style](https://github.com/standard/standard).
 
 - **Add tests!** - Your patch won't be accepted if it doesn't have tests.
 
-- **Document any change in behaviour** - Make sure the `README.md` and any other relevant documentation are kept up-to-date.
+- **Document any change in behaviour** - Make sure the [README.md](../docs/README.md) and any other relevant documentation are kept up-to-date.
 
 - **Consider our release cycle** - We try to follow [SemVer v2.0.0](https://semver.org/). Randomly breaking public APIs is not an option.
 
