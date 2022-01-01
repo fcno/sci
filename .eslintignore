@@ -4,8 +4,12 @@
 /build/**
 /config/**
 /database/**
+/docs/**
 /node_modules/**
 /public/**
+/resources/css/**
+/resources/lang/**
+/resources/views/**
 /routes/**
 /storage/**
 /tests/**
