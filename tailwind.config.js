@@ -3,20 +3,20 @@
  * @link https://tailwindcss.com/docs/presets
  */
 
-const colors = require('tailwindcss/colors');
+const colors = require('tailwindcss/colors')
 
 module.exports = {
-    presets: [
-        require('./tailwind-preset')
-    ],
+  presets: [
+    require('./tailwind-preset')
+  ],
 
-    // This configuration will be merged
-    theme: {
-        extend: {
-            colors: {
-                padrao: colors.blue,
-                escuro: colors.slate
-            }
-        },
-    },
-};
+  // This configuration will be merged
+  theme: {
+    extend: {
+      colors: {
+        padrao: colors.blue,
+        escuro: colors.slate
+      }
+    }
+  }
+}

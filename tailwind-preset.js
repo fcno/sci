@@ -5,27 +5,27 @@
  * @link https://tailwindcss.com/docs/presets
  */
 
- module.exports = {
+module.exports = {
 
-    /**
-     * Deve-se adicionar o path sempre que alguma classe css for adicionada
-     * fora do local padrão que é a pasta ./resources.
-     * Caso contrário, a classe não será gerada pelo compilador e o estilo
-     * definido não será aplicado.
-     */
-    content: [
-        './resources/**/*.blade.php',
-        './resources/**/*.js',
-        './routes/web.php',
-    ],
+  /**
+   * Deve-se adicionar o path sempre que alguma classe css for adicionada
+   * fora do local padrão que é a pasta ./resources.
+   * Caso contrário, a classe não será gerada pelo compilador e o estilo
+   * definido não será aplicado.
+   */
+  content: [
+    './resources/**/*.blade.php',
+    './resources/**/*.js',
+    './routes/web.php'
+  ],
 
-    safelist: [],
+  safelist: [],
 
-    darkMode: 'class',
+  darkMode: 'class',
 
-    theme: {
-        extend: {},
-    },
+  theme: {
+    extend: {}
+  },
 
-    plugins: [],
-};
+  plugins: []
+}
