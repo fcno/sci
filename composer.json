@@ -12,7 +12,6 @@
         "sci",
         "laravel"
     ],
-    "homepage": "https://github.com/fcno/sci",
     "authors": [
         {
             "name": "Fabio Cassiano",
@@ -21,6 +20,7 @@
             "role": "Developer"
         }
     ],
+    "homepage": "https://github.com/fcno/sci",
     "require": {
         "php": "^8.0",
         "fruitcake/laravel-cors": "^2.0",
