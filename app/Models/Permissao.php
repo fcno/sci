@@ -4,31 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\{Builder, Model};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\{BelongsToMany, HasMany};
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @link https://laravel.com/docs/8.x/eloquent
  */
-class PermanentRole extends Model
+class Permissao extends Model
 {
     use HasFactory;
 
-    protected $table = 'roles';
+    protected $table = 'permissoes';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function permissions(): BelongsToMany
+    public function perfis(): BelongsToMany
     {
-        return $this->belongsToMany(Permission::class, 'permission_role', 'role_id', 'permission_id')->withTimestamps();
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function usuarios(): HasMany
-    {
-        return $this->hasMany(Usuario::class, 'role_id', 'id');
+        return $this->belongsToMany(Perfil::class, 'perfil_permissao', 'permissao_id', 'perfil_id')->withTimestamps();
     }
 
     /**

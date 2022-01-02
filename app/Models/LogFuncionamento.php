@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * @link https://laravel.com/docs/8.x/eloquent
  */
-class AppHealth extends Model
+class LogFuncionamento extends Model
 {
     use HasFactory;
 
-    protected $table = 'app_health';
+    protected $table = 'logs_funcionamento';
 
     public $incrementing = false;
 }
