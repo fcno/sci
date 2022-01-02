@@ -61,18 +61,18 @@ test('os relacionamentos cargo, função, lotação e perfil estão funcionando'
     $perfil = Perfil::factory()
                         ->create();
 
-    $perfil_permanente = PerfilPermanente::factory()
-                                            ->for($cargo, 'cargo')
-                                            ->for($funcao, 'funcao')
-                                            ->for($lotacao, 'lotacao')
-                                            ->for($perfil, 'perfil')
-                                            ->create();
+    PerfilPermanente::factory()
+                    ->for($cargo, 'cargo')
+                    ->for($funcao, 'funcao')
+                    ->for($lotacao, 'lotacao')
+                    ->for($perfil, 'perfil')
+                    ->create();
 
-    $perfil_permanente->load(['cargo', 'funcao', 'lotacao', 'perfil']);
+    $perfil_permanente = PerfilPermanente::with(['cargo', 'funcao', 'lotacao', 'perfil'])
+                                            ->first();
 
-    expect($perfil_permanente)
-        ->cargo->toBeInstanceOf(Cargo::class)
-        ->funcao->toBeInstanceOf(Funcao::class)
-        ->lotacao->toBeInstanceOf(Lotacao::class)
-        ->perfil->toBeInstanceOf(Perfil::class);
+    expect($perfil_permanente->cargo)->toBeInstanceOf(Cargo::class)
+    ->and($perfil_permanente->funcao)->toBeInstanceOf(Funcao::class)
+    ->and($perfil_permanente->lotacao)->toBeInstanceOf(Lotacao::class)
+    ->and($perfil_permanente->perfil)->toBeInstanceOf(Perfil::class);
 });

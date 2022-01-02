@@ -31,20 +31,20 @@ test('os relacionamentos cargo, função, lotação e perfil estão funcionando'
     $perfil = Perfil::factory()
                         ->create();
 
-    $usuario = Usuario::factory()
-                        ->for($cargo, 'cargo')
-                        ->for($funcao, 'funcao')
-                        ->for($lotacao, 'lotacao')
-                        ->for($perfil, 'perfil')
-                        ->create();
+    Usuario::factory()
+            ->for($cargo, 'cargo')
+            ->for($funcao, 'funcao')
+            ->for($lotacao, 'lotacao')
+            ->for($perfil, 'perfil')
+            ->create();
 
-    $usuario->load(['cargo', 'funcao', 'lotacao', 'perfil']);
+    $usuario = Usuario::with(['cargo', 'funcao', 'lotacao', 'perfil'])
+                        ->first();
 
-    expect($usuario)
-        ->cargo->toBeInstanceOf(Cargo::class)
-        ->funcao->toBeInstanceOf(Funcao::class)
-        ->lotacao->toBeInstanceOf(Lotacao::class)
-        ->perfil->toBeInstanceOf(Perfil::class);
+    expect($usuario->cargo)->toBeInstanceOf(Cargo::class)
+    ->and($usuario->funcao)->toBeInstanceOf(Funcao::class)
+    ->and($usuario->lotacao)->toBeInstanceOf(Lotacao::class)
+    ->and($usuario->perfil)->toBeInstanceOf(Perfil::class);
 });
 
 test('lança exceção ao tentar definir relacionamentos inválidos', function($campo, $valor, $msg) {

@@ -32,22 +32,22 @@ test('os relacionamentos usuário, lotação, cliente, impressora e servidor est
     $servidor = Servidor::factory()
                             ->create();
 
-    $impressao = Impressao::factory()
-                            ->for($usuario, 'usuario')
-                            ->for($lotacao, 'lotacao')
-                            ->for($cliente, 'cliente')
-                            ->for($impressora, 'impressora')
-                            ->for($servidor, 'servidor')
-                            ->create();
+    Impressao::factory()
+                ->for($usuario, 'usuario')
+                ->for($lotacao, 'lotacao')
+                ->for($cliente, 'cliente')
+                ->for($impressora, 'impressora')
+                ->for($servidor, 'servidor')
+                ->create();
 
-    $impressao->load(['usuario', 'lotacao', 'cliente', 'impressora', 'servidor']);
+    $impressao = Impressao::with(['usuario', 'lotacao', 'cliente', 'impressora', 'servidor'])
+                            ->first();
 
-    expect($impressao)
-        ->usuario->toBeInstanceOf(Usuario::class)
-        ->lotacao->toBeInstanceOf(Lotacao::class)
-        ->cliente->toBeInstanceOf(Cliente::class)
-        ->impressora->toBeInstanceOf(Impressora::class)
-        ->servidor->toBeInstanceOf(Servidor::class);
+    expect($impressao->usuario)->toBeInstanceOf(Usuario::class)
+    ->and($impressao->lotacao)->toBeInstanceOf(Lotacao::class)
+    ->and($impressao->cliente)->toBeInstanceOf(Cliente::class)
+    ->and($impressao->impressora)->toBeInstanceOf(Impressora::class)
+    ->and($impressao->servidor)->toBeInstanceOf(Servidor::class);
 });
 
 test('lança exceção ao tentar definir relacionamentos inválidos', function($campo, $valor, $msg) {
