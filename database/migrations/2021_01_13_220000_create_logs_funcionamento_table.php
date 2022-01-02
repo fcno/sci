@@ -17,7 +17,7 @@ class CreateLogsFuncionamentoTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('log_funcionamento', function (Blueprint $table) {
+        Schema::create('logs_funcionamento', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
             // data que ocorreu a última importação do log de impressão
             $table->date('ult_import_impressao')->nullable();
@@ -36,6 +36,6 @@ class CreateLogsFuncionamentoTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('log_funcionamento');
+        Schema::dropIfExists('logs_funcionamento');
     }
 }
