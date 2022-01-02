@@ -19,41 +19,26 @@ class Usuario extends Model
 
     protected $fillable = ['sigla', 'nome', 'lotacao_id', 'cargo_id', 'funcao_id'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function lotacao(): BelongsTo
     {
         return $this->belongsTo(Lotacao::class, 'lotacao_id', 'id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function cargo(): BelongsTo
     {
         return $this->belongsTo(Cargo::class, 'cargo_id', 'id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function funcao(): BelongsTo
     {
         return $this->belongsTo(Funcao::class, 'funcao_id', 'id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function perfil(): BelongsTo
     {
         return $this->belongsTo(Perfil::class, 'perfil_id', 'id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function impressoes(): HasMany
     {
         return $this->hasMany(Impressao::class, 'usuario_id', 'id');
@@ -61,10 +46,6 @@ class Usuario extends Model
 
     /**
      * Define o escopo padrão de ordenação do modelo.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSort(Builder $query): Builder
     {

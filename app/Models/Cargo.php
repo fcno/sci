@@ -27,10 +27,6 @@ class Cargo extends Model
 
     /**
      * Define o escopo padrão de ordenação do modelo.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSort(Builder $query): Builder
     {

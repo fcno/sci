@@ -21,33 +21,21 @@ class Lotacao extends Model
 
     public $incrementing = false;
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function lotacaoPai(): BelongsTo
     {
         return $this->belongsTo(Lotacao::class, 'lotacao_pai', 'id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function lotacoesFilha(): HasMany
     {
         return $this->hasMany(Lotacao::class, 'lotacao_pai', 'id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function usuarios(): HasMany
     {
         return $this->hasMany(Usuario::class, 'lotacao_id', 'id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function impressoes(): HasMany
     {
         return $this->hasMany(Impressao::class, 'lotacao_id', 'id');
@@ -55,10 +43,6 @@ class Lotacao extends Model
 
     /**
      * Define o escopo padrão de ordenação do modelo.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSort(Builder $query): Builder
     {

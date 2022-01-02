@@ -19,17 +19,11 @@ class Servidor extends Model
 
     protected $fillable = ['nome'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function localidades(): BelongsToMany
     {
         return $this->belongsToMany(Localidade::class, 'localidade_servidor', 'servidor_id', 'localidade_id')->withTimestamps();
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function impressoes(): HasMany
     {
         return $this->hasMany(Impressao::class, 'servidor_id', 'id');
@@ -37,10 +31,6 @@ class Servidor extends Model
 
     /**
      * Define o escopo padrão de ordenação do modelo.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSort(Builder $query): Builder
     {

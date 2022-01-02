@@ -17,17 +17,11 @@ class Perfil extends Model
 
     protected $table = 'perfis';
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function permissoes(): BelongsToMany
     {
         return $this->belongsToMany(Permissao::class, 'perfil_permissao', 'perfil_id', 'permissao_id')->withTimestamps();
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function usuarios(): HasMany
     {
         return $this->hasMany(Usuario::class, 'perfil_id', 'id');
@@ -35,10 +29,6 @@ class Perfil extends Model
 
     /**
      * Define o escopo padrão de ordenação do modelo.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSort(Builder $query): Builder
     {
