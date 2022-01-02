@@ -3,6 +3,7 @@
 /bootstrap/**
 /build/**
 /config/**
+/coverage/**
 /database/**
 /docs/**
 /node_modules/**
