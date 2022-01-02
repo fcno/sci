@@ -1,0 +1,16 @@
+/.github/**
+/app/**
+/bootstrap/**
+/build/**
+/config/**
+/database/**
+/docs/**
+/node_modules/**
+/public/**
+/resources/js/**
+/resources/lang/**
+/resources/views/**
+/routes/**
+/storage/**
+/tests/**
+/vendor/**
