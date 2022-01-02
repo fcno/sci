@@ -44,9 +44,9 @@ class Usuario extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function role(): BelongsTo
+    public function perfil(): BelongsTo
     {
-        return $this->belongsTo(Role::class, 'role_id', 'id');
+        return $this->belongsTo(Perfil::class, 'perfil_id', 'id');
     }
 
     /**
