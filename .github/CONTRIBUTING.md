@@ -65,6 +65,8 @@ If the project maintainer has any additional requirements, you will find them li
 
 - **[ESLint](https://eslint.org/)** - We use the package [eslint/eslint](https://github.com/eslint/eslint) to check syntax, find problems and enforce javascript code style configured to follow the [JavaScript Standard Style](https://github.com/standard/standard).
 
+- **[StyleLint](https://stylelint.io/)** - We use the package [stylelint/stylelint](https://github.com/stylelint/stylelint) to check syntax, find problems and enforce css code style configured to follow the [stylelint-config-recommended](https://github.com/stylelint/stylelint-config-recommended).
+
 - **Add tests!** - Your patch won't be accepted if it doesn't have tests.
 
 - **Document any change in behaviour** - Make sure the [README.md](../docs/README.md) and any other relevant documentation are kept up-to-date.

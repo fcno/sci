@@ -1,25 +1,28 @@
-name: ESLint - CI for Javascript files
+name: StyleLint and ESLint - CI for CSS and Javascript files
 
 on:
   push:
 
 jobs:
-  eslint:
-    name: EsLint
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Node
+      - name: Setup LTS Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '17'
+          node-version: 'lts/*'
           check-latest: true
 
       - name: Install Node dependencies
         run: npm install
 
+      - name: Run StyleLint
+        run: npm run csslint
+
       - name: Run EsLint
-        run: npm run lint
+        run: npm run jslint
