@@ -12,10 +12,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Node
+      - name: Setup LTS Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '17'
+          node-version: 'lts/*'
           check-latest: true
 
       - name: Install Node dependencies
