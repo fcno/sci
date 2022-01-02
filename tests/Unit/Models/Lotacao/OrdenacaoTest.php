@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use App\Models\Lotacao;
 
-test('retorna as lotações usando o escopo ascendente por nome', function() {
-    $first  = 'Lotação A';
+test('retorna as lotações usando o escopo ascendente por nome', function () {
+    $first = 'Lotação A';
     $second = 'Lotação B';
-    $third  = 'Lotação C';
+    $third = 'Lotação C';
 
     Lotacao::factory()
             ->create(['nome' => $third]);

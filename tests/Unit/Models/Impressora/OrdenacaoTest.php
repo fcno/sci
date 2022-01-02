@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use App\Models\Impressora;
 
-test('retorna as impressoras usando o escopo ascendente por nome', function() {
-    $first  = 'Impressora A';
+test('retorna as impressoras usando o escopo ascendente por nome', function () {
+    $first = 'Impressora A';
     $second = 'Impressora B';
-    $third  = 'Impressora C';
+    $third = 'Impressora C';
 
     Impressora::factory()
                 ->create(['nome' => $third]);

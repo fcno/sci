@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use App\Models\Servidor;
 
-test('retorna os servidores usando o escopo ascendente por nome', function() {
-    $first  = 'Servidor A';
+test('retorna os servidores usando o escopo ascendente por nome', function () {
+    $first = 'Servidor A';
     $second = 'Servidor B';
-    $third  = 'Servidor C';
+    $third = 'Servidor C';
 
     Servidor::factory()
             ->create(['nome' => $third]);

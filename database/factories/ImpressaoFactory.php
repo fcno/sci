@@ -2,13 +2,16 @@
 
 namespace Database\Factories;
 
-use App\Models\{Cliente, Impressao, Impressora, Servidor, Usuario};
+use App\Models\Cliente;
+use App\Models\Impressao;
+use App\Models\Impressora;
+use App\Models\Servidor;
+use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Carbon;
 
 /**
- * @link https://laravel.com/docs/8.x/database-testing
- * @link https://github.com/fzaninotto/Faker
+ * @see https://laravel.com/docs/8.x/database-testing
+ * @see https://github.com/fzaninotto/Faker
  */
 class ImpressaoFactory extends Factory
 {
@@ -16,8 +19,6 @@ class ImpressaoFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
@@ -34,17 +35,16 @@ class ImpressaoFactory extends Factory
 
             'hora' => $this->faker->time(),
 
-            'nome_arquivo' => random_int(0 ,1)
-                                ? $this->faker->word() . '.txt'
+            'nome_arquivo' => random_int(0, 1)
+                                ? $this->faker->word().'.txt'
                                 : null,
 
-            'tamanho_arquivo' => random_int(0 ,1)
+            'tamanho_arquivo' => random_int(0, 1)
                                     ? $this->faker->randomNumber(3)
                                     : null,
 
             'qtd_pagina' => random_int(1, 100),
-            'qtd_copia' => random_int(1, 20)
+            'qtd_copia' => random_int(1, 20),
         ];
     }
 }
-

@@ -1,12 +1,13 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
-use App\Models\{Funcao, Usuario};
+use App\Models\Funcao;
+use App\Models\Usuario;
 
-test('o relacionamento com os usuários está funcionando', function() {
+test('o relacionamento com os usuários está funcionando', function () {
     $qtd_usuarios = 3;
 
     Funcao::factory()

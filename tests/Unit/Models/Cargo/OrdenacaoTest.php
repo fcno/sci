@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use App\Models\Cargo;
 
-test('retorna os cargos usando o escopo ascendente por nome', function() {
-    $first  = 'Cargo A';
+test('retorna os cargos usando o escopo ascendente por nome', function () {
+    $first = 'Cargo A';
     $second = 'Cargo B';
-    $third  = 'Cargo C';
+    $third = 'Cargo C';
 
     Cargo::factory()
             ->create(['nome' => $third]);

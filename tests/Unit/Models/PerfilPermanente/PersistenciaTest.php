@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use App\Models\PerfilPermanente;
 
-test('consegue cadastrar múltiplos perfis permanentes', function() {
+test('consegue cadastrar múltiplos perfis permanentes', function () {
     $qtd = 30;
 
     PerfilPermanente::factory()

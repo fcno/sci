@@ -6,8 +6,8 @@ use App\Models\Cargo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @link https://laravel.com/docs/8.x/database-testing
- * @link https://github.com/fzaninotto/Faker
+ * @see https://laravel.com/docs/8.x/database-testing
+ * @see https://github.com/fzaninotto/Faker
  */
 class CargoFactory extends Factory
 {
@@ -15,14 +15,12 @@ class CargoFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
         return [
             'id' => $this->faker->unique()->randomNumber(),
-            'nome' => $this->faker->jobTitle()
+            'nome' => $this->faker->jobTitle(),
         ];
     }
 }

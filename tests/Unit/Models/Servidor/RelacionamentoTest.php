@@ -1,12 +1,14 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
-use App\Models\{Impressao, Servidor, Localidade};
+use App\Models\Impressao;
+use App\Models\Localidade;
+use App\Models\Servidor;
 
-test('o relacionamento n:m com as localidades está funcionando', function() {
+test('o relacionamento n:m com as localidades está funcionando', function () {
     $qtd_localidades = 4;
 
     Servidor::factory()
@@ -19,7 +21,7 @@ test('o relacionamento n:m com as localidades está funcionando', function() {
     ->and($servidor->localidades)->toHaveCount($qtd_localidades);
 });
 
-test('o relacionamento com as impressões está funcionando', function() {
+test('o relacionamento com as impressões está funcionando', function () {
     $qtd_impressoes = 3;
 
     Servidor::factory()

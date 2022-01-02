@@ -6,8 +6,8 @@ use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @link https://laravel.com/docs/8.x/database-testing
- * @link https://github.com/fzaninotto/Faker
+ * @see https://laravel.com/docs/8.x/database-testing
+ * @see https://github.com/fzaninotto/Faker
  */
 class UsuarioFactory extends Factory
 {
@@ -15,8 +15,6 @@ class UsuarioFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
@@ -30,7 +28,7 @@ class UsuarioFactory extends Factory
                         ? $this->faker->name()
                         : null,
 
-            'sigla' => $this->faker->unique()->word()
+            'sigla' => $this->faker->unique()->word(),
         ];
     }
 }

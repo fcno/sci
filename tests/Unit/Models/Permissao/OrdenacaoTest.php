@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use App\Models\Permissao;
 
-test('retorna as permissões usando o escopo ascendente por nome', function() {
-    $first  = 'Permissão A';
+test('retorna as permissões usando o escopo ascendente por nome', function () {
+    $first = 'Permissão A';
     $second = 'Permissão B';
-    $third  = 'Permissão C';
+    $third = 'Permissão C';
 
     Permissao::factory()
                 ->create(['nome' => $third]);

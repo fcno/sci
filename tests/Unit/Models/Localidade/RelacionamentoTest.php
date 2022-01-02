@@ -1,12 +1,13 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
-use App\Models\{Servidor, Localidade};
+use App\Models\Localidade;
+use App\Models\Servidor;
 
-test('o relacionamento n:m com os servidores está funcionando', function() {
+test('o relacionamento n:m com os servidores está funcionando', function () {
     $qtd_servidores = 4;
 
     Localidade::factory()
