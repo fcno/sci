@@ -6,8 +6,8 @@ use App\Models\Servidor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @link https://laravel.com/docs/8.x/database-testing
- * @link https://github.com/fzaninotto/Faker
+ * @see https://laravel.com/docs/8.x/database-testing
+ * @see https://github.com/fzaninotto/Faker
  */
 class ServidorFactory extends Factory
 {
@@ -15,13 +15,11 @@ class ServidorFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
         return [
-            'nome' => $this->faker->unique()->lexify('??????????@example.org')
+            'nome' => $this->faker->unique()->lexify('??????????@example.org'),
         ];
     }
 }

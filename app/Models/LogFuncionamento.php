@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * @link https://laravel.com/docs/8.x/eloquent
+ * @see https://laravel.com/docs/8.x/eloquent
  */
 class LogFuncionamento extends Model
 {

@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use App\Models\Localidade;
 
-test('retorna as localidades usando o escopo ascendente por nome', function() {
-    $first  = 'Localidade A';
+test('retorna as localidades usando o escopo ascendente por nome', function () {
+    $first = 'Localidade A';
     $second = 'Localidade B';
-    $third  = 'Localidade C';
+    $third = 'Localidade C';
 
     Localidade::factory()
                 ->create(['nome' => $third]);

@@ -1,12 +1,13 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
-use App\Models\{Impressao, Impressora};
+use App\Models\Impressao;
+use App\Models\Impressora;
 
-test('o relacionamento com as impressões está funcionando', function() {
+test('o relacionamento com as impressões está funcionando', function () {
     $qtd_impressoes = 3;
 
     Impressora::factory()

@@ -5,15 +5,13 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * @link https://laravel.com/docs/8.x/migrations
- * @link https://dev.mysql.com/doc/refman/8.0/en/integer-types.html
+ * @see https://laravel.com/docs/8.x/migrations
+ * @see https://dev.mysql.com/doc/refman/8.0/en/integer-types.html
  */
 class CreatePerfisPermanentesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up(): void
     {
@@ -37,8 +35,6 @@ class CreatePerfisPermanentesTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down(): void
     {

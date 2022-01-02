@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use App\Models\Cliente;
 
-test('retorna as clientes usando o escopo ascendente por nome', function() {
-    $first  = 'Cliente A';
+test('retorna as clientes usando o escopo ascendente por nome', function () {
+    $first = 'Cliente A';
     $second = 'Cliente B';
-    $third  = 'Cliente C';
+    $third = 'Cliente C';
 
     Cliente::factory()
             ->create(['nome' => $third]);

@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use App\Models\Funcao;
 
-test('retorna as funções usando o escopo ascendente por nome', function() {
-    $first  = 'Funçao A';
+test('retorna as funções usando o escopo ascendente por nome', function () {
+    $first = 'Funçao A';
     $second = 'Funçao B';
-    $third  = 'Funçao C';
+    $third = 'Funçao C';
 
     Funcao::factory()
             ->create(['nome' => $third]);

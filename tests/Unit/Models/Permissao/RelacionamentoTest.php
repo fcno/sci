@@ -1,12 +1,13 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
-use App\Models\{Perfil, Permissao};
+use App\Models\Perfil;
+use App\Models\Permissao;
 
-test('o relacionamento n:m com os perfis está funcionando', function() {
+test('o relacionamento n:m com os perfis está funcionando', function () {
     $qtd_perfis = 4;
 
     Permissao::factory()

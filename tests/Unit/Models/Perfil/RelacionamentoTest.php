@@ -1,12 +1,14 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
-use App\Models\{Perfil, Permissao, Usuario};
+use App\Models\Perfil;
+use App\Models\Permissao;
+use App\Models\Usuario;
 
-test('o relacionamento n:m com as permissões está funcionando', function() {
+test('o relacionamento n:m com as permissões está funcionando', function () {
     $qtd_permissoes = 4;
 
     Perfil::factory()
@@ -19,7 +21,7 @@ test('o relacionamento n:m com as permissões está funcionando', function() {
     ->and($perfil->permissoes)->toHaveCount($qtd_permissoes);
 });
 
-test('o relacionamento com os usuários está funcionando', function() {
+test('o relacionamento com os usuários está funcionando', function () {
     $qtd_usuarios = 3;
 
     Perfil::factory()

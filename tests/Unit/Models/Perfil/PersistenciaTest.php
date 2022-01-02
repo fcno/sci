@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use App\Models\Perfil;
 use Illuminate\Support\Str;
 
-test('consegue cadastrar múltiplos perfis', function() {
+test('consegue cadastrar múltiplos perfis', function () {
     $qtd = 30;
 
     Perfil::factory()
@@ -17,7 +17,7 @@ test('consegue cadastrar múltiplos perfis', function() {
     expect(Perfil::count())->toBe($qtd);
 });
 
-test('campo do perfil em seu tamanho máximo é aceito no cadastro', function($campo, $tamanho) {
+test('campo do perfil em seu tamanho máximo é aceito no cadastro', function ($campo, $tamanho) {
     Perfil::factory()
             ->create([$campo => Str::random($tamanho)]);
 
@@ -25,10 +25,10 @@ test('campo do perfil em seu tamanho máximo é aceito no cadastro', function($c
 })->with([
     ['nome', 255],
     ['slug', 255],
-    ['descricao', 400]
+    ['descricao', 400],
 ]);
 
-test('campos opcionais corretamente definidos', function() {
+test('campos opcionais corretamente definidos', function () {
     Perfil::factory()
             ->create(['descricao' => null]);
 

@@ -1,31 +1,31 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
-use App\Models\{Impressao, Lotacao, Usuario};
+use App\Models\Impressao;
+use App\Models\Lotacao;
+use App\Models\Usuario;
 use Illuminate\Database\QueryException;
 
-test('lança exceção ao tentar definir relacionamento com lotação pai que não existe', function() {
+test('lança exceção ao tentar definir relacionamento com lotação pai que não existe', function () {
     expect(
-
-        fn() => Lotacao::factory()
+        fn () => Lotacao::factory()
                         ->create(['lotacao_pai' => 10])
-
     )->toThrow(QueryException::class, 'Cannot add or update a child row');
 });
 
-test('a lotação pai é opcional na lotação', function() {
+test('a lotação pai é opcional na lotação', function () {
     Lotacao::factory()
             ->create(['lotacao_pai' => null]);
 
     expect(Lotacao::count())->toBe(1);
 });
 
-test('os relacionamentos pai e filha estão funcionando na lotação', function() {
+test('os relacionamentos pai e filha estão funcionando na lotação', function () {
     $qtd_filhas = 3;
-    $id_pai     = 1;
+    $id_pai = 1;
 
     Lotacao::factory()
             ->create(['id' => $id_pai]);
@@ -34,7 +34,7 @@ test('os relacionamentos pai e filha estão funcionando na lotação', function(
             ->count($qtd_filhas)
             ->create(['lotacao_pai' => $id_pai]);
 
-    $pai   = Lotacao::with(['lotacoesFilha', 'lotacaoPai'])
+    $pai = Lotacao::with(['lotacoesFilha', 'lotacaoPai'])
                     ->find($id_pai);
     $filha = Lotacao::with(['lotacoesFilha', 'lotacaoPai'])
                     ->where('lotacao_pai', '=', $id_pai)
@@ -47,7 +47,7 @@ test('os relacionamentos pai e filha estão funcionando na lotação', function(
     ->and($filha->lotacoesFilha)->toHaveCount(0);
 });
 
-test('o relacionamento com os usuários e as impressões está funcionando', function() {
+test('o relacionamento com os usuários e as impressões está funcionando', function () {
     $qtd = 3;
 
     Lotacao::factory()

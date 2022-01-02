@@ -1,13 +1,18 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
-use App\Models\{Cargo, Funcao, Impressao, Lotacao, Perfil, Usuario};
+use App\Models\Cargo;
+use App\Models\Funcao;
+use App\Models\Impressao;
+use App\Models\Lotacao;
+use App\Models\Perfil;
+use App\Models\Usuario;
 use Illuminate\Database\QueryException;
 
-test('os relacionamentos cargo, função, lotação e perfil são opcionais', function($campo) {
+test('os relacionamentos cargo, função, lotação e perfil são opcionais', function ($campo) {
     Usuario::factory()
             ->create([$campo => null]);
 
@@ -16,10 +21,10 @@ test('os relacionamentos cargo, função, lotação e perfil são opcionais', fu
     'cargo_id',
     'funcao_id',
     'lotacao_id',
-    'perfil_id'
+    'perfil_id',
 ]);
 
-test('os relacionamentos cargo, função, lotação e perfil estão funcionando', function() {
+test('os relacionamentos cargo, função, lotação e perfil estão funcionando', function () {
     $cargo = Cargo::factory()
                     ->create();
     $funcao = Funcao::factory()
@@ -45,21 +50,19 @@ test('os relacionamentos cargo, função, lotação e perfil estão funcionando'
     ->and($usuario->perfil)->toBeInstanceOf(Perfil::class);
 });
 
-test('lança exceção ao tentar definir relacionamentos inválidos', function($campo, $valor, $msg) {
+test('lança exceção ao tentar definir relacionamentos inválidos', function ($campo, $valor, $msg) {
     expect(
-
-        fn() => Usuario::factory()
+        fn () => Usuario::factory()
                         ->create([$campo => $valor])
-
     )->toThrow(QueryException::class, $msg);
 })->with([
     ['cargo_id',   10, 'Cannot add or update a child row'], //inexistente
     ['funcao_id',  10, 'Cannot add or update a child row'], //inexistente
     ['lotacao_id', 10, 'Cannot add or update a child row'], //inexistente
-    ['perfil_id',  10, 'Cannot add or update a child row']  //inexistente
+    ['perfil_id',  10, 'Cannot add or update a child row'],  //inexistente
 ]);
 
-test('o relacionamento com as impressões está funcionando', function() {
+test('o relacionamento com as impressões está funcionando', function () {
     $qtd_impressoes = 3;
 
     Usuario::factory()

@@ -5,16 +5,14 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * @link https://laravel.com/docs/8.x/migrations
- * @link https://dev.mysql.com/doc/refman/8.0/en/integer-types.html
- * @link https://docs.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation
+ * @see https://laravel.com/docs/8.x/migrations
+ * @see https://dev.mysql.com/doc/refman/8.0/en/integer-types.html
+ * @see https://docs.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation
  */
 class CreateImpressoesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up(): void
     {
@@ -45,8 +43,6 @@ class CreateImpressoesTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down(): void
     {

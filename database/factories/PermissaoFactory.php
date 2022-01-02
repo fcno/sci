@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @link https://laravel.com/docs/8.x/database-testing
- * @link https://github.com/fzaninotto/Faker
+ * @see https://laravel.com/docs/8.x/database-testing
+ * @see https://github.com/fzaninotto/Faker
  */
 class PermissaoFactory extends Factory
 {
@@ -16,8 +16,6 @@ class PermissaoFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
@@ -29,7 +27,7 @@ class PermissaoFactory extends Factory
 
             'descricao' => random_int(0, 1)
                             ? $this->faker->text(255)
-                            : null
+                            : null,
         ];
     }
 }

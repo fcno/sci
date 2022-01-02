@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use App\Models\Perfil;
 
-test('retorna os perfis usando o escopo ascendente por nome', function() {
-    $first  = 'Perfil A';
+test('retorna os perfis usando o escopo ascendente por nome', function () {
+    $first = 'Perfil A';
     $second = 'Perfil B';
-    $third  = 'Perfil C';
+    $third = 'Perfil C';
 
     Perfil::factory()
             ->create(['nome' => $third]);

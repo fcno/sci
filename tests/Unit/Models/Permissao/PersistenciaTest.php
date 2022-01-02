@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use App\Models\Permissao;
 use Illuminate\Support\Str;
 
-test('consegue cadastrar múltiplas permissões', function() {
+test('consegue cadastrar múltiplas permissões', function () {
     $qtd = 30;
 
     Permissao::factory()
@@ -17,7 +17,7 @@ test('consegue cadastrar múltiplas permissões', function() {
     expect(Permissao::count())->toBe($qtd);
 });
 
-test('campo da permissão em seu tamanho máximo é aceito no cadastro', function($campo, $tamanho) {
+test('campo da permissão em seu tamanho máximo é aceito no cadastro', function ($campo, $tamanho) {
     Permissao::factory()
                 ->create([$campo => Str::random($tamanho)]);
 
@@ -25,10 +25,10 @@ test('campo da permissão em seu tamanho máximo é aceito no cadastro', functio
 })->with([
     ['nome', 255],
     ['slug', 255],
-    ['descricao', 400]
+    ['descricao', 400],
 ]);
 
-test('campos opcionais corretamente definidos', function() {
+test('campos opcionais corretamente definidos', function () {
     Permissao::factory()
                 ->create(['descricao' => null]);
 

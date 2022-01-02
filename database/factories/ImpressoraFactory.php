@@ -6,8 +6,8 @@ use App\Models\Impressora;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @link https://laravel.com/docs/8.x/database-testing
- * @link https://github.com/fzaninotto/Faker
+ * @see https://laravel.com/docs/8.x/database-testing
+ * @see https://github.com/fzaninotto/Faker
  */
 class ImpressoraFactory extends Factory
 {
@@ -15,8 +15,6 @@ class ImpressoraFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
@@ -25,7 +23,7 @@ class ImpressoraFactory extends Factory
                 random_int(0, 1)
                     ? 'imp-#####'
                     : 'mlt-#####'
-            )
+            ),
         ];
     }
 }
