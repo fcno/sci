@@ -22,15 +22,15 @@ test('lança exceção ao tentar cadastrar permissões em duplicidade, isto é, 
     )->toThrow(QueryException::class, 'Duplicate entry');
 });
 
-test('lança exceção ao tentar cadastrar permissões com campo inválido', function ($campo, $valor) {
+test('lança exceção ao tentar cadastrar permissões com campo inválido', function ($value, $field) {
     expect(
         fn () => Permissao::factory()
-                            ->create([$campo => $valor])
+                            ->create([$value => $field])
     )->toThrow(QueryException::class);
 })->with([
     ['nome',      Str::random(256), 'Data too long for column'], //campo aceita no máximo 255 caracteres
     ['nome',      null,             'cannot be null'],           //campo obrigatório
     ['slug',      Str::random(256), 'Data too long for column'], //campo aceita no máximo 255 caracteres
     ['slug',      null,             'cannot be null'],           //campo obrigatório
-    ['descricao', Str::random(401), 'Data too long for column'],  //campo aceita no máximo 400 caracteres
+    ['descricao', Str::random(401), 'Data too long for column'], //campo aceita no máximo 400 caracteres
 ]);

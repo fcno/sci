@@ -9,27 +9,27 @@ use App\Models\Localidade;
 use App\Models\Servidor;
 
 test('o relacionamento n:m com as localidades está funcionando', function () {
-    $qtd_localidades = 4;
+    $amount = 4;
 
     Servidor::factory()
-            ->has(Localidade::factory()->count($qtd_localidades), 'localidades')
+            ->has(Localidade::factory()->count($amount), 'localidades')
             ->create();
 
     $servidor = Servidor::with('localidades')->first();
 
     expect($servidor->localidades->random())->toBeInstanceOf(Localidade::class)
-    ->and($servidor->localidades)->toHaveCount($qtd_localidades);
+    ->and($servidor->localidades)->toHaveCount($amount);
 });
 
 test('o relacionamento com as impressões está funcionando', function () {
-    $qtd_impressoes = 3;
+    $amount = 3;
 
     Servidor::factory()
-            ->has(Impressao::factory()->count($qtd_impressoes), 'impressoes')
+            ->has(Impressao::factory()->count($amount), 'impressoes')
             ->create();
 
     $servidor = Servidor::with('impressoes')->first();
 
     expect($servidor->impressoes->random())->toBeInstanceOf(Impressao::class)
-    ->and($servidor->impressoes)->toHaveCount($qtd_impressoes);
+    ->and($servidor->impressoes)->toHaveCount($amount);
 });

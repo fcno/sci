@@ -8,18 +8,18 @@ use App\Models\Usuario;
 use Illuminate\Support\Str;
 
 test('consegue cadastrar múltiplos usuários', function () {
-    $qtd = 30;
+    $amount = 30;
 
     Usuario::factory()
-            ->count($qtd)
+            ->count($amount)
             ->create();
 
-    expect(Usuario::count())->toBe($qtd);
+    expect(Usuario::count())->toBe($amount);
 });
 
-test('campo do usuário em seu tamanho máximo é aceito no cadastro', function ($campo, $tamanho) {
+test('campo do usuário em seu tamanho máximo é aceito no cadastro', function ($field, $length) {
     Usuario::factory()
-            ->create([$campo => Str::random($tamanho)]);
+            ->create([$field => Str::random($length)]);
 
     expect(Usuario::count())->toBe(1);
 })->with([

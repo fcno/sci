@@ -8,18 +8,18 @@ use App\Models\Permissao;
 use Illuminate\Support\Str;
 
 test('consegue cadastrar múltiplas permissões', function () {
-    $qtd = 30;
+    $amount = 30;
 
     Permissao::factory()
-                ->count($qtd)
+                ->count($amount)
                 ->create();
 
-    expect(Permissao::count())->toBe($qtd);
+    expect(Permissao::count())->toBe($amount);
 });
 
-test('campo da permissão em seu tamanho máximo é aceito no cadastro', function ($campo, $tamanho) {
+test('campo da permissão em seu tamanho máximo é aceito no cadastro', function ($field, $length) {
     Permissao::factory()
-                ->create([$campo => Str::random($tamanho)]);
+                ->create([$field => Str::random($length)]);
 
     expect(Permissao::count())->toBe(1);
 })->with([

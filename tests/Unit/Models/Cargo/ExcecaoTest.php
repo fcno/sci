@@ -16,14 +16,14 @@ test('lança exceção ao tentar cadastrar cargos em duplicidade, isto é, com i
     )->toThrow(QueryException::class, 'Duplicate entry');
 });
 
-test('lança exceção ao tentar cadastrar cargo com campo inválido', function ($campo, $valor, $msg) {
+test('lança exceção ao tentar cadastrar cargo com campo inválido', function ($field, $value, $msg) {
     expect(
         fn () => Cargo::factory()
-                        ->create([$campo => $valor])
+                        ->create([$field => $value])
     )->toThrow(QueryException::class, $msg);
 })->with([
     ['id',   'texto',          'Incorrect integer value'],  //valor não conversível em inteiro
     ['id',   null,             'cannot be null'],           //campo obrigatório
     ['nome', Str::random(256), 'Data too long for column'], //campo aceita no máximo 255 caracteres
-    ['nome', null,             'cannot be null'],            //campo obrigatório
+    ['nome', null,             'cannot be null'],           //campo obrigatório
 ]);

@@ -8,14 +8,14 @@ use App\Models\Perfil;
 use App\Models\Permissao;
 
 test('o relacionamento n:m com os perfis está funcionando', function () {
-    $qtd_perfis = 4;
+    $amount = 4;
 
     Permissao::factory()
-                ->has(Perfil::factory()->count($qtd_perfis), 'perfis')
+                ->has(Perfil::factory()->count($amount), 'perfis')
                 ->create();
 
     $permissao = Permissao::with('perfis')->first();
 
     expect($permissao->perfis->random())->toBeInstanceOf(Perfil::class)
-    ->and($permissao->perfis)->toHaveCount($qtd_perfis);
+    ->and($permissao->perfis)->toHaveCount($amount);
 });

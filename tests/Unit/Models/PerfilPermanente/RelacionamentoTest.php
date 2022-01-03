@@ -22,9 +22,9 @@ test('lança exceção ao tentar cadastrar perfis permanentes em duplicidade, is
     )->toThrow(QueryException::class, 'Duplicate entry');
 });
 
-test('os relacionamentos cargo, função e lotação são opcionais', function ($campo) {
+test('os relacionamentos cargo, função e lotação são opcionais', function ($field) {
     PerfilPermanente::factory()
-                        ->create([$campo => null]);
+                        ->create([$field => null]);
 
     expect(PerfilPermanente::count())->toBe(1);
 })->with([
@@ -33,17 +33,17 @@ test('os relacionamentos cargo, função e lotação são opcionais', function (
     'lotacao_id',
 ]);
 
-test('lança exceção ao tentar definir relacionamentos inválidos', function ($campo, $valor, $msg) {
+test('lança exceção ao tentar definir relacionamentos inválidos', function ($field, $value, $msg) {
     expect(
         fn () => PerfilPermanente::factory()
-                                ->create([$campo => $valor])
+                                ->create([$field => $value])
     )->toThrow(QueryException::class, $msg);
 })->with([
     ['cargo_id',   10,   'Cannot add or update a child row'], //inexistente
     ['funcao_id',  10,   'Cannot add or update a child row'], //inexistente
     ['lotacao_id', 10,   'Cannot add or update a child row'], //inexistente
     ['perfil_id',  null, 'cannot be null'],                   //campo obrigatório
-    ['perfil_id',  10,   'Cannot add or update a child row'],  //inexistente
+    ['perfil_id',  10,   'Cannot add or update a child row'], //inexistente
 ]);
 
 test('os relacionamentos cargo, função, lotação e perfil estão funcionando', function () {

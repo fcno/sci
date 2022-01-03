@@ -12,9 +12,9 @@ use App\Models\Perfil;
 use App\Models\Usuario;
 use Illuminate\Database\QueryException;
 
-test('os relacionamentos cargo, função, lotação e perfil são opcionais', function ($campo) {
+test('os relacionamentos cargo, função, lotação e perfil são opcionais', function ($amount) {
     Usuario::factory()
-            ->create([$campo => null]);
+            ->create([$amount => null]);
 
     expect(Usuario::count())->toBe(1);
 })->with([
@@ -50,27 +50,27 @@ test('os relacionamentos cargo, função, lotação e perfil estão funcionando'
     ->and($usuario->perfil)->toBeInstanceOf(Perfil::class);
 });
 
-test('lança exceção ao tentar definir relacionamentos inválidos', function ($campo, $valor, $msg) {
+test('lança exceção ao tentar definir relacionamentos inválidos', function ($field, $value, $msg) {
     expect(
         fn () => Usuario::factory()
-                        ->create([$campo => $valor])
+                        ->create([$field => $value])
     )->toThrow(QueryException::class, $msg);
 })->with([
     ['cargo_id',   10, 'Cannot add or update a child row'], //inexistente
     ['funcao_id',  10, 'Cannot add or update a child row'], //inexistente
     ['lotacao_id', 10, 'Cannot add or update a child row'], //inexistente
-    ['perfil_id',  10, 'Cannot add or update a child row'],  //inexistente
+    ['perfil_id',  10, 'Cannot add or update a child row'], //inexistente
 ]);
 
 test('o relacionamento com as impressões está funcionando', function () {
-    $qtd_impressoes = 3;
+    $amount = 3;
 
     Usuario::factory()
-            ->has(Impressao::factory()->count($qtd_impressoes), 'impressoes')
+            ->has(Impressao::factory()->count($amount), 'impressoes')
             ->create();
 
     $usuario = Usuario::with('impressoes')->first();
 
     expect($usuario->impressoes->random())->toBeInstanceOf(Impressao::class)
-    ->and($usuario->impressoes)->toHaveCount($qtd_impressoes);
+    ->and($usuario->impressoes)->toHaveCount($amount);
 });

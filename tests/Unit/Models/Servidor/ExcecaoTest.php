@@ -16,12 +16,12 @@ test('lança exceção ao tentar cadastrar servidores em duplicidade, isto é, c
     )->toThrow(QueryException::class, 'Duplicate entry');
 });
 
-test('lança exceção ao tentar cadastrar servidor com campo inválido', function ($campo, $valor, $msg) {
+test('lança exceção ao tentar cadastrar servidor com campo inválido', function ($field, $value, $msg) {
     expect(
         fn () => Servidor::factory()
-                        ->create([$campo => $valor])
+                        ->create([$field => $value])
     )->toThrow(QueryException::class, $msg);
 })->with([
     ['nome',      Str::random(256), 'Data too long for column'], //campo aceita no máximo 255 caracteres
-    ['nome',      null,             'cannot be null'],            //campo obrigatório
+    ['nome',      null,             'cannot be null'],           //campo obrigatório
 ]);

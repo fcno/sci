@@ -7,9 +7,9 @@
 use App\Models\Localidade;
 
 test('retorna as localidades usando o escopo ascendente por nome', function () {
-    $first = 'Localidade A';
+    $first  = 'Localidade A';
     $second = 'Localidade B';
-    $third = 'Localidade C';
+    $third  = 'Localidade C';
 
     Localidade::factory()
                 ->create(['nome' => $third]);

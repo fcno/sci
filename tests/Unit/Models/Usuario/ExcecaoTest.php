@@ -16,13 +16,13 @@ test('lança exceção ao tentar cadastrar usuários em duplicidade, isto é, co
     )->toThrow(QueryException::class, 'Duplicate entry');
 });
 
-test('lança exceção ao tentar cadastrar usuário com campo inválido', function ($campo, $valor, $msg) {
+test('lança exceção ao tentar cadastrar usuário com campo inválido', function ($field, $value, $msg) {
     expect(
         fn () => Usuario::factory()
-                        ->create([$campo => $valor])
+                        ->create([$field => $value])
     )->toThrow(QueryException::class, $msg);
 })->with([
     ['nome',  Str::random(256), 'Data too long for column'], //campo aceita no máximo 255 caracteres
     ['sigla', Str::random(21),  'Data too long for column'], //campo aceita no máximo 20 caracteres
-    ['sigla', null,             'cannot be null'],            //campo obrigatório
+    ['sigla', null,             'cannot be null'],           //campo obrigatório
 ]);

@@ -8,18 +8,18 @@ use App\Models\Perfil;
 use Illuminate\Support\Str;
 
 test('consegue cadastrar múltiplos perfis', function () {
-    $qtd = 30;
+    $amount = 30;
 
     Perfil::factory()
-            ->count($qtd)
+            ->count($amount)
             ->create();
 
-    expect(Perfil::count())->toBe($qtd);
+    expect(Perfil::count())->toBe($amount);
 });
 
-test('campo do perfil em seu tamanho máximo é aceito no cadastro', function ($campo, $tamanho) {
+test('campo do perfil em seu tamanho máximo é aceito no cadastro', function ($field, $length) {
     Perfil::factory()
-            ->create([$campo => Str::random($tamanho)]);
+            ->create([$field => Str::random($length)]);
 
     expect(Perfil::count())->toBe(1);
 })->with([

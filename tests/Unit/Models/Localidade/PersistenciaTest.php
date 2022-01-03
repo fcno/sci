@@ -8,18 +8,18 @@ use App\Models\Localidade;
 use Illuminate\Support\Str;
 
 test('consegue cadastrar múltiplas localidades', function () {
-    $qtd = 30;
+    $amount = 30;
 
     Localidade::factory()
-                ->count($qtd)
+                ->count($amount)
                 ->create();
 
-    expect(Localidade::count())->toBe($qtd);
+    expect(Localidade::count())->toBe($amount);
 });
 
-test('campo da localidade em seu tamanho máximo é aceito no cadastro', function ($campo, $tamanho) {
+test('campo da localidade em seu tamanho máximo é aceito no cadastro', function ($amount, $length) {
     Localidade::factory()
-                ->create([$campo => Str::random($tamanho)]);
+                ->create([$amount => Str::random($length)]);
 
     expect(Localidade::count())->toBe(1);
 })->with([

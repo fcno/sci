@@ -27,10 +27,10 @@ test('lança exceção ao tentar cadastrar impressões em duplicidade, isto é, 
     )->toThrow(QueryException::class, 'Duplicate entry');
 });
 
-test('lança exceção ao tentar cadastrar impressão com campo inválido', function ($campo, $valor, $msg) {
+test('lança exceção ao tentar cadastrar impressão com campo inválido', function ($field, $value, $msg) {
     expect(
         fn () => Impressao::factory()
-                            ->create([$campo => $valor])
+                            ->create([$field => $value])
     )->toThrow(QueryException::class, $msg);
 })->with([
     ['data',            '2000-02-31',     'Incorrect date value'],     //data inexistente
@@ -44,5 +44,5 @@ test('lança exceção ao tentar cadastrar impressão com campo inválido', func
     ['qtd_pagina',      'texto',          'Incorrect integer value'],  //valor não conversível em inteiro
     ['qtd_pagina',      null,             'cannot be null'],           //campo obrigatório
     ['qtd_copia',       'texto',          'Incorrect integer value'],  //valor não conversível em inteiro
-    ['qtd_copia',       null,             'cannot be null'],            //campo obrigatório
+    ['qtd_copia',       null,             'cannot be null'],           //campo obrigatório
 ]);

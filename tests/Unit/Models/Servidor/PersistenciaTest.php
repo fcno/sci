@@ -8,18 +8,18 @@ use App\Models\Servidor;
 use Illuminate\Support\Str;
 
 test('consegue cadastrar múltiplos servidores', function () {
-    $qtd = 30;
+    $amount = 30;
 
     Servidor::factory()
-            ->count($qtd)
+            ->count($amount)
             ->create();
 
-    expect(Servidor::count())->toBe($qtd);
+    expect(Servidor::count())->toBe($amount);
 });
 
-test('campo do servidor em seu tamanho máximo é aceito no cadastro', function ($campo, $tamanho) {
+test('campo do servidor em seu tamanho máximo é aceito no cadastro', function ($field, $length) {
     Servidor::factory()
-            ->create([$campo => Str::random($tamanho)]);
+            ->create([$field => Str::random($length)]);
 
     expect(Servidor::count())->toBe(1);
 })->with([
