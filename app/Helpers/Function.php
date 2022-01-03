@@ -23,6 +23,10 @@ if (!function_exists('App\Helpers\stringToArrayAssoc')) {
      */
     function stringToArrayAssoc(array $keys, string $str, string $delimiter): ?array
     {
+        if (! $delimiter) {
+            return null;
+        }
+
         try {
             return
                 array_combine(
