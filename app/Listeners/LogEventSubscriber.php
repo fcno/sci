@@ -6,8 +6,6 @@ use App\Events\{ExceptionEvent, FailureEvent, RegularEvent};
 use Illuminate\Support\Facades\Log;
 
 /**
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
- *
  * @link https://laravel.com/docs/8.x/events#event-subscribers
  */
 class LogEventSubscriber

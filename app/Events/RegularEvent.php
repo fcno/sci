@@ -9,8 +9,6 @@ use Illuminate\Queue\SerializesModels;
 use function App\Helpers\getLogLevels;
 
 /**
- * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
- *
  * @link https://laravel.com/docs/8.x/events
  */
 class RegularEvent
