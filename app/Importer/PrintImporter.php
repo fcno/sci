@@ -22,7 +22,7 @@ use function App\Helpers\stringToArrayAssoc;
 /**
  * Importador para uma impressão, isto é, uma linha do arquivo de log.
  */
-class PrintImporter implements IImportablePrint
+final class PrintImporter implements IImportablePrint
 {
     /**
      * Linha do arquivo de log de impressão que representa uma impressão que
