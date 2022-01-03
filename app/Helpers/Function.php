@@ -2,6 +2,9 @@
 
 namespace App\Helpers;
 
+use Illuminate\Support\Collection;
+use Monolog\Logger;
+
 if (!function_exists('App\Helpers\stringToArrayAssoc')) {
 
     /**
@@ -29,5 +32,23 @@ if (!function_exists('App\Helpers\stringToArrayAssoc')) {
         } catch (\Throwable $exception) {
             return null;
         }
+    }
+}
+
+if (!function_exists('App\Helpers\getLogLevels')) {
+
+    /**
+     * Níveis de log nos termos da PSR-3.
+     *
+     * @return \Illuminate\Support\Collection chave (string nome do nível) e
+     * valor (int código do nível)
+     *
+     * @link https://www.php-fig.org/psr/psr-3/
+     */
+    function getLogLevels(): Collection
+    {
+        return collect(
+            Logger::getLevels()
+        );
     }
 }
