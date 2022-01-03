@@ -48,6 +48,8 @@ if (!function_exists('App\Helpers\getLogLevels')) {
     /**
      * Níveis de log nos termos da PSR-3.
      *
+     * Notar que os índices (nome dos níveis), estão em minúsculo
+     *
      * @return \Illuminate\Support\Collection chave (string nome do nível) e
      * valor (int código do nível)
      *
@@ -55,8 +57,12 @@ if (!function_exists('App\Helpers\getLogLevels')) {
      */
     function getLogLevels(): Collection
     {
-        return collect(
-            Logger::getLevels()
-        );
+        $levels = collect(Logger::getLevels());
+
+        $upper_keys = $levels->keyBy(function ($item, $key) {
+            return mb_strtolower($key);
+        });
+
+        return $upper_keys;
     }
 }

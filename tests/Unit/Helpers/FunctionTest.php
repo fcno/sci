@@ -32,14 +32,14 @@ test('stringToArrayAssoc explode a string com base no delimitador e retorna um a
 test('getLogLevels retorna os níveis de log nos termos da PSR-3', function() {
 
     expect(getLogLevels()->toArray())->toMatchArray([
-        "DEBUG"     => 100,
-        "INFO"      => 200,
-        "NOTICE"    => 250,
-        "WARNING"   => 300,
-        "ERROR"     => 400,
-        "CRITICAL"  => 500,
-        "ALERT"     => 550,
-        "EMERGENCY" => 600
+        "debug"     => 100,
+        "info"      => 200,
+        "notice"    => 250,
+        "warning"   => 300,
+        "error"     => 400,
+        "critical"  => 500,
+        "alert"     => 550,
+        "emergency" => 600
     ]);
 });
 
