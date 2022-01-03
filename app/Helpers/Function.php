@@ -13,6 +13,8 @@ if (!function_exists('App\Helpers\stringToArrayAssoc')) {
      *
      * Os valores extraídos devem ser compatíveis numericamente com a
      * quantidade de chaves informadas, caso contrário retornará nulo.
+     * Também retornará nulo se algum dos parâmetros for um valor false para o
+     * php
      *
      * @param array   $keys       Chaves que serão usadas para indexar o
      * array de retorno
@@ -20,10 +22,12 @@ if (!function_exists('App\Helpers\stringToArrayAssoc')) {
      * @param string  $delimiter  delimitador para a explodir a string
      *
      * @return array|null Ex.: `['key' => 'value', ...]`
+     *
+     * @link https://www.php.net/manual/en/language.types.boolean.php
      */
     function stringToArrayAssoc(array $keys, string $str, string $delimiter): ?array
     {
-        if (! $delimiter) {
+        if (! $keys || ! $str || ! $delimiter) {
             return null;
         }
 
