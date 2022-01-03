@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
+use App\Listeners\LogEventSubscriber;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Log\LogServiceProvider;
 use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
@@ -22,7 +22,7 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     protected $subscribe = [
-        LogServiceProvider::class,
+        LogEventSubscriber::class,
     ];
 
     /**
