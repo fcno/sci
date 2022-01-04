@@ -5,6 +5,7 @@ namespace App\Importer;
 use App\Events\ExceptionEvent;
 use App\Events\FailureEvent;
 use App\Events\RegularEvent;
+use App\Importer\Contract\IImportablePrintLog;
 use Bcremer\LineReader\LineReader;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
@@ -15,7 +16,7 @@ use Throwable;
 /**
  * Importador dos arquivos de log de impressão.
  */
-final class PrintLogImporter
+final class PrintLogImporter implements IImportablePrintLog
 {
     /**
      * File System em que estão armazenados os logs de impressão.
@@ -41,7 +42,7 @@ final class PrintLogImporter
     }
 
     /**
-     * Importa os logs de impressão que estão no File System.
+     * {@inheritdoc}
      */
     public function run(): void
     {
