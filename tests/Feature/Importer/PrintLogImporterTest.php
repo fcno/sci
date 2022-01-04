@@ -1,29 +1,32 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use App\Events\ExceptionEvent;
 use App\Events\FailureEvent;
 use App\Events\RegularEvent;
 use App\Importer\PrintLogImporter;
-use App\Models\{Cliente, Impressao, Impressora, Servidor, Usuario};
-use Illuminate\Support\Facades\{App, Event, Storage};
+use App\Models\Cliente;
+use App\Models\Impressao;
+use App\Models\Impressora;
+use App\Models\Servidor;
+use App\Models\Usuario;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Storage;
 
-beforeEach(function() {
-
+beforeEach(function () {
     $this->print_log_files = [
-        '01-12-2020.txt' =>
-            "server1.domain.gov.br╡01/12/2020╡08:00:00╡report.pdf╡jesaaa╡2021╡╡╡CPU-10000╡IMP-111╡1000╡4╡2" . PHP_EOL .
-            "server2.domain.gov.br╡01/12/2020╡10:30:00╡private.pdf╡jesbbb╡2021╡╡╡CPU-10000╡IMP-222╡5000╡8╡2" . PHP_EOL,
+        '01-12-2020.txt' => 'server1.domain.gov.br╡01/12/2020╡08:00:00╡report.pdf╡jesaaa╡2021╡╡╡CPU-10000╡IMP-111╡1000╡4╡2'.PHP_EOL.
+            'server2.domain.gov.br╡01/12/2020╡10:30:00╡private.pdf╡jesbbb╡2021╡╡╡CPU-10000╡IMP-222╡5000╡8╡2'.PHP_EOL,
 
-        '02-12-2020.txt' =>
-            "server1.domain.gov.br╡02/12/2020╡11:00:00╡report.pdf╡jesaaa╡2021╡╡╡CPU-10000╡IMP-333╡3000╡4╡2" . PHP_EOL .
-            "server1.domain.gov.br╡02/12/2020╡13:15:15╡games.pdf╡jesccc╡2021╡╡╡CPU-20000╡IMP-222╡1000╡4╡1" . PHP_EOL .
-            "server2.domain.gov.br╡02/12/2020╡18:01:50╡rules.pdf╡jesccc╡2021╡╡╡CPU-20000╡IMP-111╡2000╡9╡2" . PHP_EOL,
+        '02-12-2020.txt' => 'server1.domain.gov.br╡02/12/2020╡11:00:00╡report.pdf╡jesaaa╡2021╡╡╡CPU-10000╡IMP-333╡3000╡4╡2'.PHP_EOL.
+            'server1.domain.gov.br╡02/12/2020╡13:15:15╡games.pdf╡jesccc╡2021╡╡╡CPU-20000╡IMP-222╡1000╡4╡1'.PHP_EOL.
+            'server2.domain.gov.br╡02/12/2020╡18:01:50╡rules.pdf╡jesccc╡2021╡╡╡CPU-20000╡IMP-111╡2000╡9╡2'.PHP_EOL,
 
-        '03-12-2020.txt' => ''
+        '03-12-2020.txt' => '',
     ];
 
     $this->fake_disk = Storage::fake('log-impressao');
@@ -33,7 +36,7 @@ beforeEach(function() {
     }
 });
 
-afterEach(function() {
+afterEach(function () {
     $this->fake_disk = Storage::fake('log-impressao');
 });
 
@@ -42,7 +45,6 @@ test('o importador retorna o objeto da classe corretamente no método make', fun
 });
 
 test('importa o log de impressão corretamente', function () {
-
     PrintLogImporter::make()->run();
 
     expect(Impressao::get())->toHaveCount(5)
@@ -50,11 +52,9 @@ test('importa o log de impressão corretamente', function () {
     ->and(Usuario::get())->toHaveCount(3)
     ->and(Cliente::get())->toHaveCount(2)
     ->and(Impressora::get())->toHaveCount(3);
-
 });
 
 test('dispara o evento RegularEvent para registrar o início, a conclusão, a importação do log e a sua exclusão caso estivesse em produção', function () {
-
     Event::fake();
 
     PrintLogImporter::make()->run();
@@ -71,7 +71,6 @@ test('dispara o evento RegularEvent para registrar o início, a conclusão, a im
 });
 
 test('exclui todos os arquivos importados se estiver em produção', function () {
-
     $this->fake_disk->assertExists(array_keys($this->print_log_files));
 
     App::shouldReceive('environment')

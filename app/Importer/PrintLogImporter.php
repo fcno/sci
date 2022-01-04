@@ -5,10 +5,11 @@ namespace App\Importer;
 use App\Events\ExceptionEvent;
 use App\Events\FailureEvent;
 use App\Events\RegularEvent;
-use App\Importer\PrintImporter;
 use Bcremer\LineReader\LineReader;
-use Illuminate\Support\{Arr, Str};
-use Illuminate\Support\Facades\{App, Storage};
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Throwable;
 
 /**
@@ -17,9 +18,9 @@ use Throwable;
 final class PrintLogImporter
 {
     /**
-     * File System em que estão armazenados os logs de impressão
+     * File System em que estão armazenados os logs de impressão.
      *
-     * @var \Illuminate\Contracts\Filesystem\Filesystem $file_system
+     * @var \Illuminate\Contracts\Filesystem\Filesystem
      */
     private $file_system;
 
@@ -33,8 +34,6 @@ final class PrintLogImporter
 
     /**
      * Create new class instance.
-     *
-     * @return static
      */
     public static function make(): static
     {
@@ -42,9 +41,7 @@ final class PrintLogImporter
     }
 
     /**
-     * Importa os logs de impressão que estão no File System
-     *
-     * @return void
+     * Importa os logs de impressão que estão no File System.
      */
     public function run(): void
     {
@@ -55,8 +52,6 @@ final class PrintLogImporter
 
     /**
      * Tratativas iniciais para a importação.
-     *
-     * @return void
      */
     private function start(): void
     {
@@ -69,13 +64,10 @@ final class PrintLogImporter
 
     /**
      * Execução propriamente dita da importação.
-     *
-     * @return void
      */
     private function process(): void
     {
-        foreach($this->printLogFiles() as $print_log_file) {
-
+        foreach ($this->printLogFiles() as $print_log_file) {
             $saved = $this->save($print_log_file);
 
             if ($saved) {
@@ -96,15 +88,14 @@ final class PrintLogImporter
      * Não retonra o full path, mas tão somente o file name, filtrando os
      * arquivos para não retornar os logs de erro de impressão.
      *
-     * @return array  Ex.: `['21-02-2020.txt', '22-02-2020.txt', ... ]`
+     * @return array Ex.: `['21-02-2020.txt', '22-02-2020.txt', ... ]`
      */
     private function printLogFiles(): array
     {
         return Arr::where(
             $this->file_system->files(),
-
             function (string $print_log_file) {
-                return !Str::of($print_log_file)->contains('erro');
+                return ! Str::of($print_log_file)->contains('erro');
             }
         );
     }
@@ -112,14 +103,14 @@ final class PrintLogImporter
     /**
      * Persistência para todas as impressões presentes no arquivo de log.
      *
-     * @param string $print_log_file  Ex.: 21-02-2012.txt
+     * @param string $print_log_file Ex.: 21-02-2012.txt
      *
      * @return bool true se a persistência integral do arquivo foi feita ou
-     * false caso alguma linha do arquivo tenha falhado.
+     *              false caso alguma linha do arquivo tenha falhado
      */
     private function save(string $print_log_file): bool
     {
-        /**
+        /*
          * Utiliza-se a biblioteca LineReader para fazer a leitura dos arquivos
          * de log, pois eles podem ser grandes o que poderia levar ao estouro
          * de memória.
@@ -138,23 +129,19 @@ final class PrintLogImporter
          * https://github.com/bcremer/LineReader
          */
         try {
-
             foreach (LineReader::readLines($this->fullPath($print_log_file)) as $print) {
-
                 PrintImporter::make()->run((string) $print);
-
             }
 
             return true;
         } catch (Throwable $exception) {
-
             ExceptionEvent::dispatch(
                 __('error.arquivo.importacao', ['attribute' => $print_log_file]),
                 $exception,
                 'critical',
                 [
                     'file' => $print_log_file,
-                    'disk' => $this->file_system
+                    'disk' => $this->file_system,
                 ]
             );
 
@@ -163,9 +150,9 @@ final class PrintLogImporter
     }
 
     /**
-     * Caminho completo do arquivo informado
+     * Caminho completo do arquivo informado.
      *
-     * @param string  $print_log_file  ex.: 21-02-2012.txt
+     * @param string $print_log_file ex.: 21-02-2012.txt
      *
      * @return string Full path
      */
@@ -177,25 +164,22 @@ final class PrintLogImporter
     /**
      * Exclui o arquivo log de impressão informado.
      *
-     * @param string  $print_log_file  ex.: 21-02-2012.txt
-     *
-     * @return void
+     * @param string $print_log_file ex.: 21-02-2012.txt
      */
     private function delete(string $print_log_file): void
     {
-        if(App::environment('production')) {
-
+        if (App::environment('production')) {
             $deleted = $this->file_system->delete($print_log_file);
 
-            FailureEvent::dispatchIf(! $deleted,
+            FailureEvent::dispatchIf(
+                ! $deleted,
                 __('error.arquivo.delete', ['attribute' => $print_log_file]),
                 'critical',
                 [
                     'file' => $print_log_file,
-                    'disk' => $this->file_system
+                    'disk' => $this->file_system,
                 ]
             );
-
         } else {
             RegularEvent::dispatch(
                 __('strings.del_not_producao', ['attribute' => $print_log_file]),
@@ -207,8 +191,6 @@ final class PrintLogImporter
 
     /**
      * Conclusão do processamento de importação.
-     *
-     * @return void
      */
     private function finish(): void
     {
