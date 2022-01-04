@@ -7,9 +7,9 @@
 use App\Models\Permissao;
 
 test('retorna as permissões usando o escopo ascendente por nome', function () {
-    $first  = 'Permissão A';
+    $first = 'Permissão A';
     $second = 'Permissão B';
-    $third  = 'Permissão C';
+    $third = 'Permissão C';
 
     Permissao::factory()
                 ->create(['nome' => $third]);

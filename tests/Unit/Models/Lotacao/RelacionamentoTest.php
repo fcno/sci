@@ -25,7 +25,7 @@ test('a lotação pai é opcional na lotação', function () {
 
 test('os relacionamentos pai e filha estão funcionando na lotação', function () {
     $amount_child = 3;
-    $id_parent    = 1;
+    $id_parent = 1;
 
     Lotacao::factory()
             ->create(['id' => $id_parent]);

@@ -7,9 +7,9 @@
 use App\Models\Usuario;
 
 test('retorna os usuários usando o escopo ascendente por nome', function () {
-    $first  = 'Perfil A';
+    $first = 'Perfil A';
     $second = 'Perfil B';
-    $third  = 'Perfil C';
+    $third = 'Perfil C';
 
     Usuario::factory()
             ->create(['nome' => $third]);

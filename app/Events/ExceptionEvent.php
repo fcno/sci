@@ -2,15 +2,13 @@
 
 namespace App\Events;
 
-use App\Extras\Log\TraitLog;
+use function App\Helpers\getLogLevels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Throwable;
 
-use function App\Helpers\getLogLevels;
-
 /**
- * @link https://laravel.com/docs/8.x/events
+ * @see https://laravel.com/docs/8.x/events
  */
 class ExceptionEvent
 {
@@ -48,7 +46,7 @@ class ExceptionEvent
      *
      * @var string
      *
-     * @link https://www.php-fig.org/psr/psr-3/
+     * @see https://www.php-fig.org/psr/psr-3/
      */
     public $level = 'critical';
 
@@ -62,15 +60,15 @@ class ExceptionEvent
     /**
      * Create a new event instance.
      *
-     * @param string       $message    Mensagem contextual sobre o evento
-     * @param Throwable    $exception  Exception que acionou o evento
-     * @param string|null  $level      Nível do log nos termos da PSR-3
-     * @param array|null   $data       Dados de contexto do momento em que o
-     * evento foi disparado
+     * @param string      $message   Mensagem contextual sobre o evento
+     * @param Throwable   $exception Exception que acionou o evento
+     * @param string|null $level     Nível do log nos termos da PSR-3
+     * @param array|null  $data      Dados de contexto do momento em que o
+     *                               evento foi disparado
      *
      * @return void
      *
-     * @link https://www.php-fig.org/psr/psr-3/ Informações sobre a PS-3
+     * @see https://www.php-fig.org/psr/psr-3/ Informações sobre a PS-3
      */
     public function __construct(string $message, Throwable $exception, ?string $level, ?array $data)
     {
@@ -78,9 +76,9 @@ class ExceptionEvent
         $this->message = $message;
 
         $this->exception_data['message'] = $exception->getMessage();
-        $this->exception_data['class']   = get_class($exception);
-        $this->exception_data['line']    = $exception->getFile() . '@' . $exception->getLine();
-        $this->exception_data['code']    = $exception->getCode();
+        $this->exception_data['class'] = get_class($exception);
+        $this->exception_data['line'] = $exception->getFile().'@'.$exception->getLine();
+        $this->exception_data['code'] = $exception->getCode();
 
         if ($level && getLogLevels()->has($level)) {
             $this->level = $level;

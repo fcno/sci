@@ -7,9 +7,9 @@
 use App\Models\Lotacao;
 
 test('retorna as lotações usando o escopo ascendente por nome', function () {
-    $first  = 'Lotação A';
+    $first = 'Lotação A';
     $second = 'Lotação B';
-    $third  = 'Lotação C';
+    $third = 'Lotação C';
 
     Lotacao::factory()
             ->create(['nome' => $third]);

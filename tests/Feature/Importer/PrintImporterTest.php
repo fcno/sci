@@ -3,7 +3,7 @@
 /**
  * @author Fábio Cassiano <fabiocassiano@jfes.jus.br>
  *
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
 use App\Events\ExceptionEvent;
@@ -26,7 +26,7 @@ test('o importador retorna o objeto da classe corretamente no método importar',
 
 test('não importa nada da string de impressão se ela estiver completa, isto é, com todos os campos presentes (mesmo que vazios)', function () {
     // sem a delimitação para o último parâmetro (qtd de cópias)
-    $print = "server.dominio.org.br╡01/06/2020╡07:35:35╡documento de teste.pdf╡jesxxx╡2021╡╡╡CPU-10000╡IMP-123╡2567217╡1";
+    $print = 'server.dominio.org.br╡01/06/2020╡07:35:35╡documento de teste.pdf╡jesxxx╡2021╡╡╡CPU-10000╡IMP-123╡2567217╡1';
 
     PrintImporter::make()->run($print);
 
@@ -41,7 +41,6 @@ test('não importa nada da string de impressão se ela estiver completa, isto é
 });
 
 test('dispara o evento falha se o nome do servidor for inválido para importação', function ($servidor) {
-
     $print = "{$servidor}╡01/06/2020╡07:35:35╡documento de teste.pdf╡jesxxx╡2021╡╡╡CPU-10000╡IMP-123╡2567217╡1╡1";
 
     Event::fake();
@@ -52,11 +51,10 @@ test('dispara o evento falha se o nome do servidor for inválido para importaç�
     expect(Impressao::get())->toBeEmpty();
 })->with([
     Str::random(256), //campo aceita no máximo 255 caracteres
-    null              //campo obrigatório
+    null,              //campo obrigatório
 ]);
 
 test('dispara o evento falha se a sigla do usuário for inválida para importação', function ($sigla) {
-
     $print = "server.dominio.gov.br╡01/06/2020╡07:35:35╡documento de teste.pdf╡{$sigla}╡2021╡╡╡CPU-10000╡IMP-123╡2567217╡1╡1";
 
     Event::fake();
@@ -67,11 +65,10 @@ test('dispara o evento falha se a sigla do usuário for inválida para importaç
     expect(Impressao::get())->toBeEmpty();
 })->with([
     Str::random(21), //campo aceita no máximo 20 caracteres
-    null             //campo obrigatório
+    null,             //campo obrigatório
 ]);
 
 test('dispara o evento falha se o id do setor (lotação) responsável pela impressão for inválido para importação', function ($lotacao) {
-
     $print = "server.dominio.gov.br╡01/06/2020╡07:35:35╡documento de teste.pdf╡jesxx╡2021╡{$lotacao}╡╡CPU-10000╡IMP-123╡2567217╡1╡1";
 
     Event::fake();
@@ -82,11 +79,10 @@ test('dispara o evento falha se o id do setor (lotação) responsável pela impr
     expect(Impressao::get())->toBeEmpty();
 })->with([
     -1, //precisa ser maior ou igual a um
-    10  //inexistente
+    10,  //inexistente
 ]);
 
 test('o id do setor (lotação) é opcional', function () {
-
     $lotacao = null;
 
     $print = "server.dominio.gov.br╡01/06/2020╡07:35:35╡arquivo.pdf╡jesxxx╡2021╡{$lotacao}╡╡CPU-10000╡IMP-123╡2567217╡1╡1";
@@ -97,7 +93,6 @@ test('o id do setor (lotação) é opcional', function () {
 });
 
 test('dispara o evento falha se o nome do cliente for inválido para importação', function ($cliente) {
-
     $print = "server.dominio.gov.br╡01/06/2020╡07:35:35╡documento de teste.pdf╡jesxxx╡2021╡╡╡{$cliente}╡IMP-123╡2567217╡1╡1";
 
     Event::fake();
@@ -108,11 +103,10 @@ test('dispara o evento falha se o nome do cliente for inválido para importaçã
     expect(Impressao::get())->toBeEmpty();
 })->with([
     Str::random(256), //campo aceita no máximo 255 caracteres
-    null              //campo obrigatório
+    null,              //campo obrigatório
 ]);
 
 test('dispara o evento falha se o nome da impressora for inválido para importação', function ($impressora) {
-
     $print = "server.dominio.gov.br╡01/06/2020╡07:35:35╡documento de teste.pdf╡jesxxx╡2021╡╡╡CPU-10000╡{$impressora}╡2567217╡1╡1";
 
     Event::fake();
@@ -123,11 +117,10 @@ test('dispara o evento falha se o nome da impressora for inválido para importa�
     expect(Impressao::get())->toBeEmpty();
 })->with([
     Str::random(256), //campo aceita no máximo 255 caracteres
-    null              //campo obrigatório
+    null,              //campo obrigatório
 ]);
 
 test('dispara o evento falha se a data da impressão for inválida para importação', function ($data) {
-
     $print = "server.dominio.gov.br╡{$data}╡07:35:35╡documento de teste.pdf╡jesxxx╡2021╡╡╡CPU-10000╡IMP-123╡2567217╡1╡1";
 
     Event::fake();
@@ -139,11 +132,10 @@ test('dispara o evento falha se a data da impressão for inválida para importa�
 })->with([
     '31/02/2020', //data inválida
     '28-02-2020', //deve ser no formato dd/mm/yyyy
-    null          //campo obrigatório
+    null,          //campo obrigatório
 ]);
 
 test('dispara o evento falha se a hora da impressão for inválida para importação', function ($hora) {
-
     $print = "server.dominio.gov.br╡01/06/2020╡{$hora}╡documento de teste.pdf╡jesxxx╡2021╡╡╡CPU-10000╡IMP-123╡2567217╡1╡1";
 
     Event::fake();
@@ -155,11 +147,10 @@ test('dispara o evento falha se a hora da impressão for inválida para importa�
 })->with([
     '23:61:59', //hora inválida
     '2:59:59',  //deve ser no formato hh:mm:ss
-    null        //campo obrigatório
+    null,        //campo obrigatório
 ]);
 
 test('dispara o evento falha se o nome do arquivo impresso for inválido para importação', function () {
-
     //campo aceita no máximo 260 caracteres
     $arquivo = Str::random(261);
 
@@ -174,7 +165,6 @@ test('dispara o evento falha se o nome do arquivo impresso for inválido para im
 });
 
 test('o nome do arquivo é opcional', function () {
-
     $arquivo = null;
 
     $print = "server.dominio.gov.br╡01/06/2020╡07:35:35╡{$arquivo}╡jesxxx╡2021╡╡╡CPU-10000╡IMP-123╡2567217╡1╡1";
@@ -185,7 +175,6 @@ test('o nome do arquivo é opcional', function () {
 });
 
 test('dispara o evento falha se número de páginas for inválido para importação', function ($paginas) {
-
     $print = "server.dominio.gov.br╡01/06/2020╡07:35:35╡arquivo.pdf╡jesxxx╡2021╡╡╡CPU-10000╡IMP-123╡2567217╡{$paginas}╡1";
 
     Event::fake();
@@ -196,7 +185,7 @@ test('dispara o evento falha se número de páginas for inválido para importaç
     expect(Impressao::get())->toBeEmpty();
 })->with([
     'texto', //valor não conversível em inteiro
-    null     //campo obrigatório
+    null,     //campo obrigatório
 ]);
 
 test('dispara o evento falha se número de cópias for inválido para importação', function ($copias) {
@@ -210,7 +199,7 @@ test('dispara o evento falha se número de cópias for inválido para importaç�
     expect(Impressao::get())->toBeEmpty();
 })->with([
     'texto', //valor não conversível em inteiro
-    null     //campo obrigatório
+    null,     //campo obrigatório
 ]);
 
 test('dispara o evento falha se o tamanho do arquivo for inválido para importação', function ($tamanho) {
@@ -223,11 +212,10 @@ test('dispara o evento falha se o tamanho do arquivo for inválido para importa�
     Event::assertDispatched(FailureEvent::class);
     expect(Impressao::get())->toBeEmpty();
 })->with([
-    'texto' //valor não conversível em inteiro
+    'texto', //valor não conversível em inteiro
 ]);
 
 test('o tamanho do arquivo é opcional', function () {
-
     $tamanho = null;
 
     $print = "server.dominio.gov.br╡01/06/2020╡07:35:35╡documento.pdf╡jesxxx╡2021╡╡╡CPU-10000╡IMP-123╡{$tamanho}╡1╡1";
@@ -240,8 +228,8 @@ test('o tamanho do arquivo é opcional', function () {
 test('transação faz roolback em caso de exception na persistência da impressão', function () {
     //Note que duas impressões com a mesma data, hora, usuário e impressora são considerais iguais.
     //Nesse caso, os dados da segunda impressão não devem existir no banco de dados devido ao roolback.
-    $print_1 = "server1.dominio.gov.br╡01/06/2020╡07:35:35╡documento1.pdf╡jesxxx╡2021╡╡╡CPU-10000╡IMP-123╡2567217╡1╡1";
-    $print_2 = "server2.dominio.gov.br╡01/06/2020╡07:35:35╡documento2.pdf╡jesxxx╡2022╡╡╡CPU-20000╡IMP-123╡5567217╡2╡3";
+    $print_1 = 'server1.dominio.gov.br╡01/06/2020╡07:35:35╡documento1.pdf╡jesxxx╡2021╡╡╡CPU-10000╡IMP-123╡2567217╡1╡1';
+    $print_2 = 'server2.dominio.gov.br╡01/06/2020╡07:35:35╡documento2.pdf╡jesxxx╡2022╡╡╡CPU-20000╡IMP-123╡5567217╡2╡3';
 
     PrintImporter::make()->run($print_1);
     PrintImporter::make()->run($print_2);
@@ -256,8 +244,8 @@ test('transação faz roolback em caso de exception na persistência da impress�
 
 test('dispara o evento exceção se houver exception na persistência da impressão', function () {
     //as impressões a seguir são consideradas iguais
-    $print_1 = "server1.dominio.gov.br╡01/06/2020╡07:35:35╡documento1.pdf╡jesxxx╡2021╡╡╡CPU-10000╡IMP-123╡2567217╡1╡1";
-    $print_2 = "server2.dominio.gov.br╡01/06/2020╡07:35:35╡documento2.pdf╡jesxxx╡2022╡╡╡CPU-20000╡IMP-123╡5567217╡2╡3";
+    $print_1 = 'server1.dominio.gov.br╡01/06/2020╡07:35:35╡documento1.pdf╡jesxxx╡2021╡╡╡CPU-10000╡IMP-123╡2567217╡1╡1';
+    $print_2 = 'server2.dominio.gov.br╡01/06/2020╡07:35:35╡documento2.pdf╡jesxxx╡2022╡╡╡CPU-20000╡IMP-123╡5567217╡2╡3';
 
     PrintImporter::make()->run($print_1);
 
@@ -270,8 +258,8 @@ test('dispara o evento exceção se houver exception na persistência da impress
 });
 
 test('importa uma impressão (linha do arquivo txt) corretamente', function () {
-    $servidor   = 'server.dominio.gov.br';
-    $cliente    = 'CPU-10000';
+    $servidor = 'server.dominio.gov.br';
+    $cliente = 'CPU-10000';
     $impressora = 'IMP-123';
 
     Lotacao::factory()->create();

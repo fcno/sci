@@ -7,9 +7,9 @@
 use App\Models\Cargo;
 
 test('retorna os cargos usando o escopo ascendente por nome', function () {
-    $first  = 'Cargo A';
+    $first = 'Cargo A';
     $second = 'Cargo B';
-    $third  = 'Cargo C';
+    $third = 'Cargo C';
 
     Cargo::factory()
             ->create(['nome' => $third]);

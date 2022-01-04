@@ -7,9 +7,9 @@
 use App\Models\PerfilPermanente;
 
 test('retorna os perfis permanentes usando o escopo ascendente por id', function () {
-    $first  = 10;
+    $first = 10;
     $second = 30;
-    $third  = 50;
+    $third = 50;
 
     PerfilPermanente::factory()
                         ->create(['id' => $third]);

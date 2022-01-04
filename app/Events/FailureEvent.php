@@ -2,14 +2,12 @@
 
 namespace App\Events;
 
-use App\Extras\Log\TraitLog;
+use function App\Helpers\getLogLevels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-use function App\Helpers\getLogLevels;
-
 /**
- * @link https://laravel.com/docs/8.x/events
+ * @see https://laravel.com/docs/8.x/events
  */
 class FailureEvent
 {
@@ -35,7 +33,7 @@ class FailureEvent
      *
      * @var string
      *
-     * @link https://www.php-fig.org/psr/psr-3/
+     * @see https://www.php-fig.org/psr/psr-3/
      */
     public $level = 'error';
 
@@ -49,14 +47,14 @@ class FailureEvent
     /**
      * Create a new event instance.
      *
-     * @param string       $message  Mensagem contextual sobre o evento
-     * @param string|null  $level    Nível do log nos termos da PSR-3
-     * @param array|null   $data     Dados de contexto do momento em que o
-     * evento foi disparado
+     * @param string      $message Mensagem contextual sobre o evento
+     * @param string|null $level   Nível do log nos termos da PSR-3
+     * @param array|null  $data    Dados de contexto do momento em que o
+     *                             evento foi disparado
      *
      * @return void
      *
-     * @link https://www.php-fig.org/psr/psr-3/ Informações sobre a PS-3
+     * @see https://www.php-fig.org/psr/psr-3/ Informações sobre a PS-3
      */
     public function __construct(string $message, ?string $level, ?array $data)
     {

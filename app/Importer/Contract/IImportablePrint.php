@@ -23,10 +23,6 @@ interface IImportablePrint
      * - quantidade de cópias
      *
      * Campos delimitados pelo caracter **╡**
-     *
-     * @param string $print
-     *
-     * @return void
      */
     public function run(string $print): void;
 }

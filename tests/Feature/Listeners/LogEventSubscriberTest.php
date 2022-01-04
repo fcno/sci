@@ -1,22 +1,24 @@
 <?php
 
 /**
- * @link https://pestphp.com/docs/
+ * @see https://pestphp.com/docs/
  */
 
-use App\Events\{ExceptionEvent, FailureEvent, RegularEvent};
+use App\Events\ExceptionEvent;
+use App\Events\FailureEvent;
+use App\Events\RegularEvent;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-test('o log no nível default está sendo registrado corretamente pelo handler de exceção do LogEventSubscriber', function() {
-    $msg       = 'context message';
+test('o log no nível default está sendo registrado corretamente pelo handler de exceção do LogEventSubscriber', function () {
+    $msg = 'context message';
     $exception = new Exception();
 
     Log::shouldReceive('critical')
         ->once()
         ->withArgs(function ($message) use ($msg) {
             return Str::of($message)->contains($msg);
-    });
+        });
 
     ExceptionEvent::dispatch(
         $msg,
@@ -26,9 +28,9 @@ test('o log no nível default está sendo registrado corretamente pelo handler d
     );
 });
 
-test('é possível redefinir o tipo de log a ser registrado pelo handler de exceção do LogEventSubscriber', function() {
+test('é possível redefinir o tipo de log a ser registrado pelo handler de exceção do LogEventSubscriber', function () {
     //https://www.php-fig.org/psr/psr-3/
-    $level     = 'emergency';
+    $level = 'emergency';
     $exception = new Exception();
 
     Log::shouldReceive($level)
@@ -42,14 +44,14 @@ test('é possível redefinir o tipo de log a ser registrado pelo handler de exce
     );
 });
 
-test('o log no nível default está sendo registrado corretamente pelo handler de falha do LogEventSubscriber', function() {
+test('o log no nível default está sendo registrado corretamente pelo handler de falha do LogEventSubscriber', function () {
     $msg = 'context message';
 
     Log::shouldReceive('error')
         ->once()
         ->withArgs(function ($message) use ($msg) {
             return Str::of($message)->contains($msg);
-    });
+        });
 
     FailureEvent::dispatch(
         $msg,
@@ -58,7 +60,7 @@ test('o log no nível default está sendo registrado corretamente pelo handler d
     );
 });
 
-test('é possível redefinir o tipo de log a ser registrado pelo handler de falha do LogEventSubscriber', function() {
+test('é possível redefinir o tipo de log a ser registrado pelo handler de falha do LogEventSubscriber', function () {
     //https://www.php-fig.org/psr/psr-3/
     $level = 'warning';
 
@@ -72,14 +74,14 @@ test('é possível redefinir o tipo de log a ser registrado pelo handler de falh
     );
 });
 
-test('o log no nível default está sendo registrado corretamente pelo handler regular do LogEventSubscriber', function() {
+test('o log no nível default está sendo registrado corretamente pelo handler regular do LogEventSubscriber', function () {
     $msg = 'context message';
 
     Log::shouldReceive('info')
         ->once()
         ->withArgs(function ($message) use ($msg) {
             return Str::of($message)->contains($msg);
-    });
+        });
 
     RegularEvent::dispatch(
         $msg,
@@ -88,7 +90,7 @@ test('o log no nível default está sendo registrado corretamente pelo handler r
     );
 });
 
-test('é possível redefinir o tipo de log a ser registrado pelo handler regular do LogEventSubscriber', function() {
+test('é possível redefinir o tipo de log a ser registrado pelo handler regular do LogEventSubscriber', function () {
     //https://www.php-fig.org/psr/psr-3/
     $level = 'debug';
 

@@ -7,9 +7,9 @@
 use App\Models\Impressora;
 
 test('retorna as impressoras usando o escopo ascendente por nome', function () {
-    $first  = 'Impressora A';
+    $first = 'Impressora A';
     $second = 'Impressora B';
-    $third  = 'Impressora C';
+    $third = 'Impressora C';
 
     Impressora::factory()
                 ->create(['nome' => $third]);

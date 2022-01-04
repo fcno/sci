@@ -4,6 +4,7 @@ namespace App\Importer;
 
 use App\Events\ExceptionEvent;
 use App\Events\FailureEvent;
+use function App\Helpers\stringToArrayAssoc;
 use App\Importer\Contract\IImportablePrint;
 use App\Models\Cliente;
 use App\Models\Impressao;
@@ -17,8 +18,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Throwable;
 
-use function App\Helpers\stringToArrayAssoc;
-
 /**
  * Importador para uma impressão, isto é, uma linha do arquivo de log.
  */
@@ -28,21 +27,21 @@ final class PrintImporter implements IImportablePrint
      * Linha do arquivo de log de impressão que representa uma impressão que
      * será imporatada.
      *
-     * @var string $print_line
+     * @var string
      */
     private $print_line;
 
     /**
      * Delimitador de separação dos campos da impressão.
      *
-     * @var string $delimiter
+     * @var string
      */
     private $delimiter = '╡';
 
     /**
      * Campos, na sequenciados corretamente, que compõem uma impressão.
      *
-     * @var array $fields
+     * @var array
      */
     private $fields = [
         'servidor',
@@ -57,32 +56,30 @@ final class PrintImporter implements IImportablePrint
         'impressora',
         'tamanho_arquivo',
         'qtd_pagina',
-        'qtd_copia'
+        'qtd_copia',
     ];
 
     /**
      * Regras que serão aplicadas aos campos que serão importados.
      *
-     * @var array $rules
+     * @var array
      */
-    protected $rules = [
-        'servidor'        => ['required', 'string',  'max:255'],
-        'data'            => ['required', 'string',  'date_format:d/m/Y'],
-        'hora'            => ['required', 'string',  'date_format:H:i:s'],
-        'nome_arquivo'    => ['nullable', 'max:260'],
-        'sigla'           => ['required', 'string',  'max:20'],
-        'setor_id'        => ['nullable', 'integer', 'exists:lotacoes,id'],
-        'cliente'         => ['required', 'string',  'max:255'],
-        'impressora'      => ['required', 'string',  'max:255'],
+    private $rules = [
+        'servidor' => ['required', 'string',  'max:255'],
+        'data' => ['required', 'string',  'date_format:d/m/Y'],
+        'hora' => ['required', 'string',  'date_format:H:i:s'],
+        'nome_arquivo' => ['nullable', 'max:260'],
+        'sigla' => ['required', 'string',  'max:20'],
+        'setor_id' => ['nullable', 'integer', 'exists:lotacoes,id'],
+        'cliente' => ['required', 'string',  'max:255'],
+        'impressora' => ['required', 'string',  'max:255'],
         'tamanho_arquivo' => ['nullable', 'integer', 'gte:1'],
-        'qtd_pagina'      => ['required', 'integer', 'gte:1'],
-        'qtd_copia'       => ['required', 'integer', 'gte:1']
+        'qtd_pagina' => ['required', 'integer', 'gte:1'],
+        'qtd_copia' => ['required', 'integer', 'gte:1'],
     ];
 
     /**
      * Create new class instance.
-     *
-     * @return static
      */
     public static function make(): static
     {
@@ -90,7 +87,7 @@ final class PrintImporter implements IImportablePrint
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function run(string $print): void
     {
@@ -116,11 +113,11 @@ final class PrintImporter implements IImportablePrint
      *
      * Em caso de falha de validação, retorna null e loga as falhas.
      *
-     * @param array  $inputs  Ex.: `['key' => 'value', ... ]`
+     * @param array $inputs Ex.: `['key' => 'value', ... ]`
      *
-     * @return array|null     Ex.: `['key' => 'value', ... ]`
+     * @return array|null Ex.: `['key' => 'value', ... ]`
      */
-    protected function validateAndLogError(array $inputs): ?array
+    private function validateAndLogError(array $inputs): ?array
     {
         $validator = Validator::make($inputs, $this->rules);
 
@@ -130,6 +127,7 @@ final class PrintImporter implements IImportablePrint
                 $inputs,
                 $validator->getMessageBag()->toArray()
             );
+
             return null;
         }
 
@@ -139,11 +137,9 @@ final class PrintImporter implements IImportablePrint
     /**
      * Dispara um evento do tipo **failure** para registro dos dados.
      *
-     * @param string  $msg            sobre a falha
-     * @param array   $input          dados que seriam persistidos
-     * @param array   $validator_bag  falhas de validação
-     *
-     * @return void
+     * @param string $msg           sobre a falha
+     * @param array  $input         dados que seriam persistidos
+     * @param array  $validator_bag falhas de validação
      */
     private function triggerFailure(string $msg, array $input, array $validator_bag): void
     {
@@ -151,12 +147,12 @@ final class PrintImporter implements IImportablePrint
             $msg,
             'warning',
             [
-                'input'       => $input,
-                'rules'       => $this->rules,
-                'print_line'  => $this->print_line,
-                'delimiter'   => $this->delimiter,
-                'fields'      => $this->fields,
-                'error_bag'   => $validator_bag
+                'input' => $input,
+                'rules' => $this->rules,
+                'print_line' => $this->print_line,
+                'delimiter' => $this->delimiter,
+                'fields' => $this->fields,
+                'error_bag' => $validator_bag,
             ]
         );
     }
@@ -164,11 +160,9 @@ final class PrintImporter implements IImportablePrint
     /**
      * Dispara um evento do tipo **exception** para registro dos dados.
      *
-     * @param string     $msg        sobre a falha
-     * @param Throwable  $exception  Exception que foi gerada
-     * @param array      $input      dados que originaram a falha
-     *
-     * @return void
+     * @param string    $msg       sobre a falha
+     * @param Throwable $exception Exception que foi gerada
+     * @param array     $input     dados que originaram a falha
      */
     private function triggerException(string $msg, Throwable $exception, array $input): void
     {
@@ -177,41 +171,37 @@ final class PrintImporter implements IImportablePrint
             $exception,
             'critical',
             [
-                'input'     => $input,
-                'rules'     => $this->rules,
-                'print'     => $this->print_line,
+                'input' => $input,
+                'rules' => $this->rules,
+                'print' => $this->print_line,
                 'delimiter' => $this->delimiter,
-                'fields'    => $this->fields
+                'fields' => $this->fields,
             ]
         );
     }
 
     /**
      * Faz a persistência da impressão.
-     *
-     * @param array $validated
-     *
-     * @return void
      */
-    protected function save(array $validated): void
+    private function save(array $validated): void
     {
         DB::beginTransaction();
 
         try {
-            $servidor   = Servidor::firstOrCreate(['nome' => $validated['servidor']]);
+            $servidor = Servidor::firstOrCreate(['nome' => $validated['servidor']]);
             $impressora = Impressora::firstOrCreate(['nome' => $validated['impressora']]);
-            $cliente    = Cliente::firstOrCreate(['nome' => $validated['cliente']]);
-            $usuario    = Usuario::firstOrCreate(['sigla' => $validated['sigla']]);
-            $lotacao    = Lotacao::find($validated['setor_id']);
+            $cliente = Cliente::firstOrCreate(['nome' => $validated['cliente']]);
+            $usuario = Usuario::firstOrCreate(['sigla' => $validated['sigla']]);
+            $lotacao = Lotacao::find($validated['setor_id']);
 
-            $impressao = new Impressao;
+            $impressao = new Impressao();
 
-            $impressao->data            = Carbon::createFromFormat('d/m/Y', $validated['data']);
-            $impressao->hora            = Carbon::createFromFormat('H:i:s', $validated['hora']);
-            $impressao->nome_arquivo    = Arr::get($validated, 'nome_arquivo') ?: null;
+            $impressao->data = Carbon::createFromFormat('d/m/Y', $validated['data']);
+            $impressao->hora = Carbon::createFromFormat('H:i:s', $validated['hora']);
+            $impressao->nome_arquivo = Arr::get($validated, 'nome_arquivo') ?: null;
             $impressao->tamanho_arquivo = Arr::get($validated, 'tamanho_arquivo') ?: null;
-            $impressao->qtd_pagina      = $validated['qtd_pagina'];
-            $impressao->qtd_copia       = $validated['qtd_copia'];
+            $impressao->qtd_pagina = $validated['qtd_pagina'];
+            $impressao->qtd_copia = $validated['qtd_copia'];
 
             $impressao->usuario()->associate($usuario);
             $impressao->cliente()->associate($cliente);
