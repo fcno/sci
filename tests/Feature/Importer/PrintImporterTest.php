@@ -20,7 +20,7 @@ use App\Models\Usuario;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 
-test('o importador retorna o objeto da classe corretamente no método importar', function () {
+test('o importador retorna o objeto da classe corretamente no método make', function () {
     expect(PrintImporter::make())->toBeInstanceOf(PrintImporter::class);
 });
 
