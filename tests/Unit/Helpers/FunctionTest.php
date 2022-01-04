@@ -13,7 +13,7 @@ test('stringToArrayAssoc retorna null se valores inválidos forem informados', f
     [['nome', 'idade', 'nacionalidade', 'chave_em_excesso'], 'Fábio,18,brasileiro', ','], // qtd chaves incompatível com a string
     [[], 'Fábio,18,brasileiro', ','],                                                     // chaves não informadas (array vazio)
     [['nome', 'idade', 'nacionalidade', 'chave_em_excesso'], '', ','],                    // string vazia
-    [['nome', 'idade', 'nacionalidade', 'chave_em_excesso'], 'Fábio,18,brasileiro', ''],   // delimitador vazio
+    [['nome', 'idade', 'nacionalidade', 'chave_em_excesso'], 'Fábio,18,brasileiro', ''],  // delimitador vazio
 ]);
 
 test('stringToArrayAssoc explode a string com base no delimitador e retorna um array associativo corretamente', function () {
