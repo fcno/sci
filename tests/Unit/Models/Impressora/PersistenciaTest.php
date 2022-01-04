@@ -8,13 +8,13 @@ use App\Models\Impressora;
 use Illuminate\Support\Str;
 
 test('consegue cadastrar múltiplas impressoras', function () {
-    $qtd = 30;
+    $amount = 30;
 
     Impressora::factory()
-                ->count($qtd)
+                ->count($amount)
                 ->create();
 
-    expect(Impressora::count())->toBe($qtd);
+    expect(Impressora::count())->toBe($amount);
 });
 
 test('nome da impressora em seu tamanho máximo é aceito no cadastro', function () {

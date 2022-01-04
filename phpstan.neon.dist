@@ -10,6 +10,11 @@ parameters:
         - database
         - tests
 
+    ignoreErrors:
+        -
+            message: '#Undefined variable: \$this#'
+            path: tests
+
     # The level 9 is the highest level
     level: 5
 

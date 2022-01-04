@@ -7,18 +7,18 @@
 use App\Models\LogFuncionamento;
 
 test('consegue cadastrar múltiplos logs de funcionamento', function () {
-    $qtd = 30;
+    $amount = 30;
 
     LogFuncionamento::factory()
-                    ->count($qtd)
+                    ->count($amount)
                     ->create();
 
-    expect(LogFuncionamento::count())->toBe($qtd);
+    expect(LogFuncionamento::count())->toBe($amount);
 });
 
-test('campos opcionais corretamente definidos', function ($campo) {
+test('campos opcionais corretamente definidos', function ($field) {
     LogFuncionamento::factory()
-                    ->create([$campo => null]);
+                    ->create([$field => null]);
 
     expect(LogFuncionamento::count())->toBe(1);
 })->with([

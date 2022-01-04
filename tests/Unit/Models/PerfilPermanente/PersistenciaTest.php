@@ -7,11 +7,11 @@
 use App\Models\PerfilPermanente;
 
 test('consegue cadastrar múltiplos perfis permanentes', function () {
-    $qtd = 30;
+    $amount = 30;
 
     PerfilPermanente::factory()
-                    ->count($qtd)
+                    ->count($amount)
                     ->create();
 
-    expect(PerfilPermanente::count())->toBe($qtd);
+    expect(PerfilPermanente::count())->toBe($amount);
 });

@@ -53,6 +53,11 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
+        'log-impressao' => [
+            'driver' => 'local',
+            'root' => env('LOG_IMPRESSAO'),
+        ],
+
     ],
 
     /*

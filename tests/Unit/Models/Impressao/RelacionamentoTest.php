@@ -12,9 +12,9 @@ use App\Models\Servidor;
 use App\Models\Usuario;
 use Illuminate\Database\QueryException;
 
-test('o relacionamento lotação é opcional', function ($campo) {
+test('o relacionamento lotação é opcional', function ($field) {
     Impressao::factory()
-                ->create([$campo => null]);
+                ->create([$field => null]);
 
     expect(Usuario::count())->toBe(1);
 })->with([
@@ -55,10 +55,10 @@ test('os relacionamentos usuário, lotação, cliente, impressora e servidor est
     ->and($impressao->servidor)->toBeInstanceOf(Servidor::class);
 });
 
-test('lança exceção ao tentar definir relacionamentos inválidos', function ($campo, $valor, $msg) {
+test('lança exceção ao tentar definir relacionamentos inválidos', function ($field, $value, $msg) {
     expect(
         fn () => Impressao::factory()
-                        ->create([$campo => $valor])
+                        ->create([$field => $value])
     )->toThrow(QueryException::class, $msg);
 })->with([
     ['usuario_id',    10,   'Cannot add or update a child row'], //inexistente
@@ -69,5 +69,5 @@ test('lança exceção ao tentar definir relacionamentos inválidos', function (
     ['impressora_id', 10,   'Cannot add or update a child row'], //inexistente
     ['impressora_id', null, 'cannot be null'],                   //campo obrigatório
     ['servidor_id',   10,   'Cannot add or update a child row'], //inexistente
-    ['servidor_id',   null, 'cannot be null'],                    //campo obrigatório
+    ['servidor_id',   null, 'cannot be null'],                   //campo obrigatório
 ]);

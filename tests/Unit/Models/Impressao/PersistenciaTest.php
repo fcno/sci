@@ -8,13 +8,13 @@ use App\Models\{Impressao};
 use Illuminate\Support\Str;
 
 test('consegue cadastrar múltiplas impressões', function () {
-    $qtd = 30;
+    $amount = 30;
 
     Impressao::factory()
-                ->count($qtd)
+                ->count($amount)
                 ->create();
 
-    expect(Impressao::count())->toBe($qtd);
+    expect(Impressao::count())->toBe($amount);
 });
 
 test('nome do arquivo seu tamanho máximo é aceito no cadastro', function () {
@@ -24,9 +24,9 @@ test('nome do arquivo seu tamanho máximo é aceito no cadastro', function () {
     expect(Impressao::count())->toBe(1);
 });
 
-test('campos opcionais corretamente definidos', function ($campo) {
+test('campos opcionais corretamente definidos', function ($field) {
     Impressao::factory()
-                ->create([$campo => null]);
+                ->create([$field => null]);
 
     expect(Impressao::count())->toBe(1);
 })->with([

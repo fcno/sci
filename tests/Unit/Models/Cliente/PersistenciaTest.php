@@ -8,13 +8,13 @@ use App\Models\Cliente;
 use Illuminate\Support\Str;
 
 test('consegue cadastrar múltiplos clientes', function () {
-    $qtd = 30;
+    $amount = 30;
 
     Cliente::factory()
-            ->count($qtd)
+            ->count($amount)
             ->create();
 
-    expect(Cliente::count())->toBe($qtd);
+    expect(Cliente::count())->toBe($amount);
 });
 
 test('nome do cliente em seu tamanho máximo é aceito no cadastro', function () {

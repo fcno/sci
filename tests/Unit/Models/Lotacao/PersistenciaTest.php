@@ -8,18 +8,18 @@ use App\Models\Lotacao;
 use Illuminate\Support\Str;
 
 test('consegue cadastrar múltiplas lotações', function () {
-    $qtd = 30;
+    $amount = 30;
 
     Lotacao::factory()
-            ->count($qtd)
+            ->count($amount)
             ->create();
 
-    expect(Lotacao::count())->toBe($qtd);
+    expect(Lotacao::count())->toBe($amount);
 });
 
-test('campo da lotação em seu tamanho máximo é aceito no cadastro', function ($campo, $tamanho) {
+test('campo da lotação em seu tamanho máximo é aceito no cadastro', function ($field, $length) {
     Lotacao::factory()
-            ->create([$campo => Str::random($tamanho)]);
+            ->create([$field => Str::random($length)]);
 
     expect(Lotacao::count())->toBe(1);
 })->with([

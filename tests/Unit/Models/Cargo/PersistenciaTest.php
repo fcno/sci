@@ -8,13 +8,13 @@ use App\Models\Cargo;
 use Illuminate\Support\Str;
 
 test('consegue cadastrar múltiplos cargos', function () {
-    $qtd = 30;
+    $amount = 30;
 
     Cargo::factory()
-            ->count($qtd)
+            ->count($amount)
             ->create();
 
-    expect(Cargo::count())->toBe($qtd);
+    expect(Cargo::count())->toBe($amount);
 });
 
 test('nome do cargo em seu tamanho máximo é aceito no cadastro', function () {

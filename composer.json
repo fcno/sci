@@ -23,6 +23,7 @@
     "homepage": "https://github.com/fcno/sci",
     "require": {
         "php": "^8.0",
+        "bcremer/line-reader": "^1.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
@@ -49,7 +50,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/Function.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -84,7 +88,7 @@
             "@php artisan key:generate --ansi"
         ],
         "analyse": "vendor/bin/phpstan analyse --memory-limit 1G --error-format=github",
-        "test": "vendor/bin/pest",
-        "test-coverage": "composer test -- --coverage"
+        "coverage": "composer test -- --coverage",
+        "test": "vendor/bin/pest"
     }
 }
