@@ -19,7 +19,8 @@ class FuncaoFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => $this->faker->unique()->randomNumber(),
+            // Evitar gerar números repetidos no auto relacionamento
+            'id' => $this->faker->unique()->numberBetween(int1: 10000),
             'nome' => $this->faker->jobTitle(),
         ];
     }
