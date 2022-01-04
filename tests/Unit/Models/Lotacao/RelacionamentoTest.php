@@ -24,20 +24,20 @@ test('a lotação pai é opcional na lotação', function () {
 });
 
 test('os relacionamentos pai e filha estão funcionando na lotação', function () {
-    $amount_child  = 3;
-    $amount_parent = 1;
+    $amount_child = 3;
+    $id_parent    = 1;
 
     Lotacao::factory()
-            ->create(['id' => $amount_parent]);
+            ->create(['id' => $id_parent]);
 
     Lotacao::factory()
             ->count($amount_child)
-            ->create(['lotacao_pai' => $amount_parent]);
+            ->create(['lotacao_pai' => $id_parent]);
 
     $pai = Lotacao::with(['lotacoesFilha', 'lotacaoPai'])
-                    ->find($amount_parent);
+                    ->find($id_parent);
     $filha = Lotacao::with(['lotacoesFilha', 'lotacaoPai'])
-                    ->where('lotacao_pai', '=', $amount_parent)
+                    ->where('lotacao_pai', '=', $id_parent)
                     ->get()
                     ->random();
 
