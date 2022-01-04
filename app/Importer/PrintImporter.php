@@ -102,7 +102,9 @@ final class PrintImporter implements IImportablePrint
             $this->delimiter
         );
 
-        $validated = $this->validateAndLogError($input);
+        $validated = $input
+                        ? $this->validateAndLogError($input)
+                        : null;
 
         if ($validated) {
             $this->save($validated);
