@@ -24,7 +24,7 @@
     "require": {
         "php": "^8.0",
         "bcremer/line-reader": "^1.2",
-        "fruitcake/laravel-cors": "^2.0",
+        "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
